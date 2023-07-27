@@ -7,6 +7,7 @@ const CUBES = 'cubes';
 const LINKS = 'links';
 
 const AUTONOMOUS = 'Autonomous';
+
 const Autonomous: React.FC = () => {
     const { classes } = useStyles();
 
