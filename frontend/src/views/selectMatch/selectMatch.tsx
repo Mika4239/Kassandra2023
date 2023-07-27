@@ -10,7 +10,7 @@ const TEAM = 'team';
 
 const START = 'Start';
 
-const SelectMatch = () => {
+const SelectMatch: React.FC = () => {
     const { classes } = useStyles();
 
     const [match, setMatch] = useState<string>('');
