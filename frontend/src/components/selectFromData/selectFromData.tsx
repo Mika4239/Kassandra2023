@@ -17,8 +17,8 @@ const SelectFromData: React.FC<SelectFromDataProps> = (props) => {
         label={name}
         onChange={(e) => setChosen(e.target.value)}
       >
-        {data.map((item) => (
-          <MenuItem value={item}>{item}</MenuItem>
+        {data.map((item, index) => (
+          <MenuItem key={index} value={item}>{item}</MenuItem>
         ))}
       </Select>
     </FormControl>
