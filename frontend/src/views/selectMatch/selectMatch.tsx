@@ -4,6 +4,8 @@ import useStyles from "./selectMatchStyles";
 import { Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks";
+import { useDispatch } from "react-redux";
+import { resetMatchData } from "../../redux/matchDataSlice";
 
 const SELECT_MATCH = 'Select Match';
 
@@ -20,6 +22,7 @@ const SelectMatch: React.FC = () => {
     const [teams, setTeams] = useState<string[]>([]);
 
     const match = useAppSelector(state => state.matchData.match);
+    const dispatch = useDispatch();
 
     const getData = async <T,>(url: string): Promise<T> => {
         const resp = await fetch(url, {
@@ -31,6 +34,8 @@ const SelectMatch: React.FC = () => {
     };
 
     useEffect(() => {
+        dispatch(resetMatchData());
+        
         getData<Match[]>('https://www.thebluealliance.com/api/v3/event/2023isde1/matches')
         .catch(error => console.log(error))
         .then((response) => response && setMatches(response.map((event) => event.key)));
