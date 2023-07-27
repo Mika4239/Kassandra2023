@@ -10,7 +10,8 @@ const useStyles = makeStyles()({
     },
     title: {
         fontSize: '50px',
-        color: '#213547'
+        color: '#213547',
+        textTransform: 'capitalize'
     }
 });
 
