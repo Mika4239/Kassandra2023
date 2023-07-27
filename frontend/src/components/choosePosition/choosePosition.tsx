@@ -16,7 +16,7 @@ const ChoosePosition: React.FC<ChoosePositionProps> = (props) => {
 
   return (
     <div className={classes.positionRadio}>
-      <h2 className={classes.label}>{period + " " + POSITION}</h2>
+      <h2 className={classes.title}>{period + " " + POSITION}</h2>
       <RadioGroup
         defaultValue={Position.NONE}
         name={`${period}-position`}

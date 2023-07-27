@@ -8,7 +8,7 @@ const useStyles = makeStyles()({
         width: '100vw',
         alignItems: 'center'
     },
-    label: {
+    title: {
         fontSize: '30px',
         color: '#213547',
         fontWeight: 'bold',
