@@ -7,4 +7,8 @@ router.get('/', async (req, res) => {
   res.json(await matchDataController.getAllData());
 });
 
+router.post('/', async (req, res) => {
+  res.json(await matchDataController.addMatchData(req.body));
+})
+
 module.exports = router;
