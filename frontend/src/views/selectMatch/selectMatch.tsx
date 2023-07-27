@@ -1,9 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 import SelectFromData from "../../components/selectFromData/selectFromData";
 import useStyles from "./selectMatchStyles";
+import { Button } from "@mui/material";
+
+const SELECT_MATCH = 'Select Match';
 
 const MATCH = 'match';
 const TEAM = 'team';
+
+const START = 'Start';
 
 const SelectMatch = () => {
     const { classes } = useStyles();
@@ -38,6 +43,7 @@ const SelectMatch = () => {
 
     return (
         <div className={classes.selectPage}>
+            <h1 className={classes.title}>{SELECT_MATCH}</h1>
             <SelectFromData 
                 name={MATCH}
                 data={matches}
@@ -50,6 +56,9 @@ const SelectMatch = () => {
                 chosen={team}
                 setChosen={setTeam}
             />
+            <Button variant="contained">
+                {START}
+            </Button>
         </div>
     );
 };

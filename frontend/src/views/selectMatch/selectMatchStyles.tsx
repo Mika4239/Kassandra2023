@@ -8,6 +8,11 @@ const useStyles = makeStyles()({
         height: '100vh',
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    title: {
+        fontFamily: 'Helvetica',
+        fontSize: '50px',
+        color: '#213547'
     }
 });
 
