@@ -1,0 +1,3 @@
+interface ChangeGPProps {
+    gp: string;
+}
