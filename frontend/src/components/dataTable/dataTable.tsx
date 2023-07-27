@@ -7,6 +7,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import DataTableProps from "./dataTableProps";
+import { IconButton } from "@mui/material";
+import DownloadIcon from "@mui/icons-material/Download";
 
 const MAIN_TITLES = [
   "",
@@ -40,6 +42,26 @@ const SUB_TITLES = [
 
 const DataTable: React.FC<DataTableProps> = (props) => {
   const { data } = props;
+
+  const createCSV = () => {
+    const csv: string =
+      MAIN_TITLES.join(",") +
+      "\n" +
+      SUB_TITLES.join(",") +
+      "\n" +
+      data.map(
+        (row) =>
+          row.match +
+          "," +
+          row.team +
+          "," +
+          Object.values(row.autonomous).join(",") + ',' +
+          Object.values(row.teleop).join(",") + ',' +
+          Object.values(row.endgame).join(",")
+      ).join('\n');
+
+      window.open(encodeURI("data:text/csv;charset=utf-8," + csv));
+  };
   return (
     <>
       <TableContainer component={Paper}>
@@ -75,6 +97,9 @@ const DataTable: React.FC<DataTableProps> = (props) => {
           </TableBody>
         </Table>
       </TableContainer>
+      <IconButton onClick={createCSV}>
+        <DownloadIcon />
+      </IconButton>
     </>
   );
 };
