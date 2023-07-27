@@ -1,0 +1,3 @@
+interface ChoosePositionProps {
+    period: string;
+}

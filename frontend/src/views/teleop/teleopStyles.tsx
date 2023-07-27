@@ -4,9 +4,7 @@ const useStyles = makeStyles()({
     teleopPage: {
         display: 'flex',
         flexDirection: 'column',
-        height: '100vh',
         width: '100vw',
-        justifyContent: 'center',
         alignItems: 'center',
         fontFamily: 'Helvetica'
     },

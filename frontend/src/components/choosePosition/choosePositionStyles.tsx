@@ -1,16 +1,17 @@
-import { makeStyles } from 'tss-react/mui';
+import { makeStyles } from "tss-react/mui";
 
 const useStyles = makeStyles()({
-    autonomousPage: {
+    positionRadio: {
+        margin: '30px',
         display: 'flex',
         flexDirection: 'column',
         width: '100vw',
-        alignItems: 'center',
-        fontFamily: 'Helvetica'
+        alignItems: 'center'
     },
-    title: {
-        fontSize: '50px',
+    label: {
+        fontSize: '30px',
         color: '#213547',
+        fontWeight: 'bold',
         textTransform: 'capitalize'
     }
 });

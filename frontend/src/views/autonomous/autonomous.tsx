@@ -1,12 +1,13 @@
 import ChangeGP from "../../components/changeGP/changeGP";
 import CheckMobility from "../../components/checkMobility/checkMobility";
+import ChoosePosition from "../../components/choosePosition/choosePosition";
 import useStyles from "./autonomousStyles";
 
 const CONES = 'cones';
 const CUBES = 'cubes';
 const LINKS = 'links';
 
-const AUTONOMOUS = 'Autonomous';
+const AUTONOMOUS = 'autonomous';
 
 const Autonomous: React.FC = () => {
     const { classes } = useStyles();
@@ -18,6 +19,7 @@ const Autonomous: React.FC = () => {
             <ChangeGP gp={CONES}/>
             <ChangeGP gp={CUBES}/>
             <ChangeGP gp={LINKS}/>
+            <ChoosePosition period={AUTONOMOUS} />
         </div>
     );
 };
