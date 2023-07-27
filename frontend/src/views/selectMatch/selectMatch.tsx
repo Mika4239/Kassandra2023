@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import SelectFromData from "../../components/selectFromData/selectFromData";
 import useStyles from "./selectMatchStyles";
 import { Button } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
 const SELECT_MATCH = 'Select Match';
 
@@ -9,6 +10,7 @@ const MATCH = 'match';
 const TEAM = 'team';
 
 const START = 'Start';
+const NEXT_PATH = '/autonomous';
 
 const SelectMatch: React.FC = () => {
     const { classes } = useStyles();
@@ -56,9 +58,11 @@ const SelectMatch: React.FC = () => {
                 chosen={team}
                 setChosen={setTeam}
             />
-            <Button variant="contained">
-                {START}
-            </Button>
+            <NavLink to={NEXT_PATH}>
+                <Button variant="contained">
+                    {START}
+                </Button>
+            </NavLink>
         </div>
     );
 };
