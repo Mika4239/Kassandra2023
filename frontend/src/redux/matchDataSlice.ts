@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import Position from '../types/position';
-import  { PeriodGP, AutonomousState, TeleopState, EndgameState, Periods, PeriodPosition, PositionPeriods } from '../interfaces/interfaces';
+import  { PeriodGP, AutonomousState, TeleopState, EndgameState, Periods, PeriodPosition, PositionPeriods, MatchTeam, SelectMatchState } from '../interfaces/interfaces';
 
 interface MatchDataState {
     match: string;
@@ -53,10 +53,13 @@ export const matchDataSlice = createSlice({
     },
     setComments: (state, action: PayloadAction<string>) => {
         state.endgame.comments = action.payload;
+    },
+    setMatchTeam: (state, action: PayloadAction<MatchTeam>) => {
+        state[action.payload.name as keyof SelectMatchState] = action.payload.input;
     }
   }
 })
 
-export const { resetMatchData, setGPAmount, setPosition, setMobility } = matchDataSlice.actions;
+export const { resetMatchData, setGPAmount, setPosition, setMobility, setComments, setMatchTeam } = matchDataSlice.actions;
 
 export default matchDataSlice.reducer;

@@ -11,7 +11,7 @@ const persistConfig = {
 
 const store = configureStore({
   reducer: {
-    matchDataReducer: persistReducer(persistConfig, matchDataReducer),
+    matchData: persistReducer(persistConfig, matchDataReducer),
   },
 });
 

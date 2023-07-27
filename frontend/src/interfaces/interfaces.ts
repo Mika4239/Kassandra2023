@@ -43,3 +43,13 @@ export interface PositionPeriods {
         position: Position
     }
 }
+
+export interface MatchTeam {
+    name: string;
+    input: string;
+}
+
+export interface SelectMatchState {
+    team: string;
+    match: string;
+}

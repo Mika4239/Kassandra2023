@@ -6,7 +6,7 @@ const CONES = 'cones';
 const CUBES = 'cubes';
 const LINKS = 'links';
 
-const TELEOP = 'Teleop';
+const TELEOP = 'teleop';
 
 const PREV_PATH = 'autonomous';
 const NEXT_PATH = 'endgame';
@@ -17,9 +17,9 @@ const Teleop: React.FC = () => {
     return (
         <div className={classes.teleopPage}>
             <h1 className={classes.title}>{TELEOP}</h1>
-            <ChangeGP gp={CONES}/>
-            <ChangeGP gp={CUBES}/>
-            <ChangeGP gp={LINKS}/>
+            <ChangeGP gp={CONES} period={TELEOP} />
+            <ChangeGP gp={CUBES} period={TELEOP} />
+            <ChangeGP gp={LINKS} period={TELEOP} />
             <NavButtons prevPath={PREV_PATH} nextPath={NEXT_PATH} />
         </div>
     );
