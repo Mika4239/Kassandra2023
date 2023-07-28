@@ -14,6 +14,19 @@ module.exports.getKeys = () => {
     return keys;
 };
 
+module.exports.getAverageData = async (path) => {
+    return await matchData.aggregate([
+        {
+            $group: {
+                _id: '$team',
+                number: {
+                    $avg: `$${path}`
+                }
+            }
+        }
+    ]);
+};
+
 module.exports.addMatchData = async (data) => {
     const matchData = new MatchData(data);
     matchData.save();

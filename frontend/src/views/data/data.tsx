@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "../../axios";
 import DataTable from "../../components/dataTable/dataTable";
 import { MatchData } from "../../types/matchData";
+import DataGraph from "../../components/dataGraph/dataGraph";
 
 const Data = () => {
     const [data, setData] = useState<MatchData[]>([]);
@@ -12,7 +13,8 @@ const Data = () => {
 
     return (
         <>
-        <DataTable data={data} />
+            <DataTable data={data} />
+            <DataGraph />
         </>
     );
 };

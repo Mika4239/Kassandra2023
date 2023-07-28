@@ -9,10 +9,14 @@ router.get('/', async (req, res) => {
 
 router.get('/keys', async (req, res) => {
   res.json(matchDataController.getKeys());
-})
+});
 
 router.post('/', async (req, res) => {
   res.json(await matchDataController.addMatchData(req.body));
+});
+
+router.post('/avg', async (req, res) => {
+  res.json(await matchDataController.getAverageData(req.body.path));
 });
 
 module.exports = router;
