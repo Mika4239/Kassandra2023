@@ -77,7 +77,7 @@ module.exports.getCount = async (data) => {
 
 module.exports.addMatchData = async (data) => {
   const matchData = new MatchData(data);
-  matchData.save();
+  await matchData.save();
 
   return { success: matchData.id };
 };
