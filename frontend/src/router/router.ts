@@ -4,8 +4,13 @@ import Autonomous from "../views/autonomous/autonomous";
 import Teleop from "../views/teleop/teleop";
 import Endgame from "../views/endgame/endgame";
 import Data from "../views/data/data";
+import Login from "../views/login/login";
 
 const router = createBrowserRouter([
+    {
+        path: '/',
+        Component: Login
+    },
     {
         path: '/select',
         Component: SelectMatch
