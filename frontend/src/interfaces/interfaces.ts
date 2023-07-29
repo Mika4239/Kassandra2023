@@ -30,6 +30,14 @@ export interface EndgameState {
     comments: string;
 }
 
+export interface MatchDataState {
+    match: string;
+    team: string;
+    autonomous: AutonomousState,
+    teleop: TeleopState,
+    endgame: EndgameState
+};
+
 export interface Periods {
     autonomous: AutonomousState,
     teleop: TeleopState

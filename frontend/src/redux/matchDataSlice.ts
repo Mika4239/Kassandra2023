@@ -1,14 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import Position from '../types/position';
-import  { PeriodGP, AutonomousState, TeleopState, EndgameState, Periods, PeriodPosition, PositionPeriods, MatchTeam, SelectMatchState } from '../interfaces/interfaces';
-
-interface MatchDataState {
-    match: string;
-    team: string;
-    autonomous: AutonomousState,
-    teleop: TeleopState,
-    endgame: EndgameState
-};
+import  { PeriodGP,  TeleopState, Periods, PeriodPosition, PositionPeriods, MatchTeam, SelectMatchState, MatchDataState } from '../interfaces/interfaces';
 
 const initialState: MatchDataState = {
     match: '',
