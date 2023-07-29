@@ -5,7 +5,7 @@ const useStyles = makeStyles()({
         display: 'flex',
         flexDirection: 'column',
         width: '100vw',
-        height: '100vh',
+        height: '70vh',
         justifyContent: 'center',
         alignItems: 'center'
     },
