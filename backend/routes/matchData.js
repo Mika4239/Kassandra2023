@@ -11,6 +11,10 @@ router.get('/keys', async (req, res) => {
   res.json(matchDataController.getKeys());
 });
 
+router.get('/mobility', async (req, res) => {
+  res.json(await matchDataController.getMobility());
+});
+
 router.post('/', async (req, res) => {
   res.json(await matchDataController.addMatchData(req.body));
 });

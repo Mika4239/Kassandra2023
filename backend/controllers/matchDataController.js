@@ -1,15 +1,14 @@
 const MatchData = require("../schemas/matchData");
-const matchData = require("../schemas/matchData");
 
 const POSITIONS = ["NONE", "DOCKED", "ENGAGED", "PARK"];
 
 module.exports.getAllData = async () => {
-  return await matchData.find({});
+  return await MatchData.find({});
 };
 
 module.exports.getKeys = () => {
   const keys = [];
-  matchData.schema.eachPath((path) => {
+  MatchData.schema.eachPath((path) => {
     if (path.includes(".") && !path.includes("comments")) {
       path.includes("position")
         ? POSITIONS.map((position) => {
@@ -23,8 +22,28 @@ module.exports.getKeys = () => {
   return keys;
 };
 
+module.exports.getMobility = async () => {
+  return await MatchData.aggregate([
+    {
+      $match: {
+        'autonomous.mobility': {
+          $eq: true,
+        },
+      },
+    },
+    {
+      $group: {
+        _id: "$team",
+        number: {
+          $count: {},
+        },
+      },
+    },
+  ]);
+};
+
 module.exports.getAverageData = async (path) => {
-  return await matchData.aggregate([
+  return await MatchData.aggregate([
     {
       $group: {
         _id: "$team",
@@ -37,7 +56,7 @@ module.exports.getAverageData = async (path) => {
 };
 
 module.exports.getCount = async (data) => {
-  return await matchData.aggregate([
+  return await MatchData.aggregate([
     {
       $match: {
         [`${data.period}.position`]: {
