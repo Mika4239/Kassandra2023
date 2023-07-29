@@ -21,12 +21,22 @@ const DataGraph = () => {
   const [key, setKey] = useState<string>("");
 
   useEffect(() => {
-    key !== "" &&
-      axios
-        .post("/matchData/avg", {
-          path: key,
-        })
+    if(key !== "") {
+        const isCount = (key.includes('position') || key.includes('mobility'));
+        const path = isCount ? 'count' : 'avg';
+        const splitKey = key.split('.');
+        const body = isCount ? 
+        {
+            period: splitKey[0],
+            position: splitKey[splitKey.length - 1]
+        } :
+        {
+            path: key
+        }
+        axios
+        .post(`/matchData/${path}`, body)
         .then((response) => setData(response.data));
+    }
   }, [key]);
 
   return (

@@ -29,7 +29,7 @@ const SelectGraph: React.FC<SelectGraphProps> = (props) => {
       >
         {keys.map((item, index) => (
           <MenuItem key={index} value={item}>
-            {item.replace('.', ' ')}
+            {item.split('.').join(' ').toLowerCase()}
           </MenuItem>
         ))}
       </Select>

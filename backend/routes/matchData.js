@@ -19,4 +19,8 @@ router.post('/avg', async (req, res) => {
   res.json(await matchDataController.getAverageData(req.body.path));
 });
 
+router.post('/count', async (req, res) => {
+  res.json(await matchDataController.getCount(req.body));
+});
+
 module.exports = router;
