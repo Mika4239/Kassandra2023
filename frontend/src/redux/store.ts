@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import matchDataReducer from "./matchDataSlice";
+import currentUserReducer from "./currentUserSlice";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import persistStore from "redux-persist/es/persistStore";
@@ -12,6 +13,7 @@ const persistConfig = {
 const store = configureStore({
   reducer: {
     matchData: persistReducer(persistConfig, matchDataReducer),
+    user: persistReducer(persistConfig, currentUserReducer)
   },
 });
 

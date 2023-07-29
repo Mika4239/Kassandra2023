@@ -10,8 +10,7 @@ const userSchema = new Schema({
     required: true,
   },
   team: {
-    type: String,
-    required: true,
+    type: String
   },
 });
 

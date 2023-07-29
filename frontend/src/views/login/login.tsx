@@ -3,6 +3,8 @@ import useStyles from "./loginStyles";
 import { useState } from "react";
 import axios from "../../axios";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/currentUserSlice";
 
 const LOGIN = "Login";
 const SIGN_IN = "Sign in";
@@ -11,6 +13,7 @@ const SIGN_UP = "Sign up";
 const Login = () => {
   const { classes } = useStyles();
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [username, setUsername] = useState<string>("");
@@ -23,6 +26,7 @@ const Login = () => {
     }).then(response => response.data);
 
     if(userExists){
+        axios.get(`/users/user/${username}`).then(response => dispatch(setUser(response.data)));
         navigate('/select');
     }
   }
