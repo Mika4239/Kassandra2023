@@ -1,4 +1,3 @@
-import * as React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -6,9 +5,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import DataTableProps from "./dataTableProps";
 import { IconButton } from "@mui/material";
 import DownloadIcon from "@mui/icons-material/Download";
+import { useEffect, useState } from "react";
+import axios from "../../axios";
+import { MatchData } from "../../types/matchData";
+import useStyles from "./dataTableStyles";
 
 const MAIN_TITLES = [
   "",
@@ -40,8 +42,14 @@ const SUB_TITLES = [
   "comments",
 ];
 
-const DataTable: React.FC<DataTableProps> = (props) => {
-  const { data } = props;
+const DataTable: React.FC = () => {
+  const { classes } = useStyles();
+
+  const [data, setData] = useState<MatchData[]>([]);
+
+  useEffect(() => {
+    axios.get("/matchData").then((response) => setData(response.data));
+  }, []);
 
   const createCSV = () => {
     const csv: string =
@@ -49,22 +57,26 @@ const DataTable: React.FC<DataTableProps> = (props) => {
       "\n" +
       SUB_TITLES.join(",") +
       "\n" +
-      data.map(
-        (row) =>
-          row.match +
-          "," +
-          row.team +
-          "," +
-          Object.values(row.autonomous).join(",") + ',' +
-          Object.values(row.teleop).join(",") + ',' +
-          Object.values(row.endgame).join(",")
-      ).join('\n');
+      data
+        .map(
+          (row) =>
+            row.match +
+            "," +
+            row.team +
+            "," +
+            Object.values(row.autonomous).join(",") +
+            "," +
+            Object.values(row.teleop).join(",") +
+            "," +
+            Object.values(row.endgame).join(",")
+        )
+        .join("\n");
 
-      window.open(encodeURI("data:text/csv;charset=utf-8," + csv));
+    window.open(encodeURI("data:text/csv;charset=utf-8," + csv));
   };
   return (
     <>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} className={classes.container}>
         <Table>
           <TableHead>
             <TableRow>
@@ -83,23 +95,25 @@ const DataTable: React.FC<DataTableProps> = (props) => {
               <TableRow key={row._id}>
                 <TableCell>{row.match}</TableCell>
                 <TableCell>{row.team}</TableCell>
-                {Object.values(row.autonomous).map((value) => (
-                  <TableCell>{value.toString()}</TableCell>
+                {Object.values(row.autonomous).map((value, index) => (
+                  <TableCell key={index}>{value.toString()}</TableCell>
                 ))}
-                {Object.values(row.teleop).map((value) => (
-                  <TableCell>{value.toString()}</TableCell>
+                {Object.values(row.teleop).map((value, index) => (
+                  <TableCell key={index}>{value.toString()}</TableCell>
                 ))}
-                {Object.values(row.endgame).map((value) => (
-                  <TableCell>{value.toString()}</TableCell>
+                {Object.values(row.endgame).map((value, index) => (
+                  <TableCell key={index}>{value.toString()}</TableCell>
                 ))}
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-      <IconButton onClick={createCSV}>
-        <DownloadIcon />
-      </IconButton>
+      <div className={classes.download}>
+        <IconButton onClick={createCSV}>
+          <DownloadIcon className={classes.icon} />
+        </IconButton>
+      </div>
     </>
   );
 };

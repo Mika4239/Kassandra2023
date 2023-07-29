@@ -4,6 +4,7 @@ import {
   BarChart,
   CartesianGrid,
   Legend,
+  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
@@ -18,7 +19,7 @@ interface NumberData {
 
 const DataGraph = () => {
   const [data, setData] = useState<NumberData[]>([]);
-  const [key, setKey] = useState<string>("");
+  const [key, setKey] = useState<string>('');
 
   useEffect(() => {
     if (key !== "") {
@@ -47,15 +48,17 @@ const DataGraph = () => {
 
   return (
     <>
-      <BarChart width={500} height={300} data={data}>
-        <CartesianGrid />
-        <XAxis dataKey="_id" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="number" fill="#8884d8" />
-      </BarChart>
-      <SelectGraph key={key} setKey={setKey} />
+      <ResponsiveContainer width="80%" aspect={2.5}>
+        <BarChart data={data}>
+          <CartesianGrid />
+          <XAxis dataKey="_id" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="number" fill="#ff9c34" />
+        </BarChart>
+      </ResponsiveContainer>
+      <SelectGraph setKey={setKey} />
     </>
   );
 };

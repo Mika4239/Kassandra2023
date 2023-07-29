@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react";
-import axios from "../../axios";
 import DataTable from "../../components/dataTable/dataTable";
-import { MatchData } from "../../types/matchData";
 import DataGraph from "../../components/dataGraph/dataGraph";
+import useStyles from "./dataStyles";
+import React from "react";
 
-const Data = () => {
-    const [data, setData] = useState<MatchData[]>([]);
+const TABLE = 'Table';
+const GRAPH = 'Graph';
 
-    useEffect(() => {
-        axios.get('/matchData').then(response => setData(response.data))
-    }, []);
+const Data: React.FC = () => {
+    const { classes } = useStyles();
 
     return (
-        <>
-            <DataTable data={data} />
+        <div className={classes.dataPage}>
+            <h1 className={classes.title}>{TABLE}</h1>
+            <DataTable />
+            <h1 className={classes.title}>{GRAPH}</h1>
             <DataGraph />
-        </>
+        </div>
     );
 };
 
