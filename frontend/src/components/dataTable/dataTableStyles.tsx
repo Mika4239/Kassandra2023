@@ -6,7 +6,6 @@ const useStyles = makeStyles()({
     },
     download: {
         display: 'flex',
-        width: '90vw',
         justifyContent: 'start',
         margin: '10px'
     },

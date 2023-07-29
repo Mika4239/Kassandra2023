@@ -75,8 +75,8 @@ const DataTable: React.FC = () => {
     window.open(encodeURI("data:text/csv;charset=utf-8," + csv));
   };
   return (
-    <>
-      <TableContainer component={Paper} className={classes.container}>
+    <div className={classes.container}>
+      <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
@@ -109,12 +109,10 @@ const DataTable: React.FC = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <div className={classes.download}>
-        <IconButton onClick={createCSV}>
+        <IconButton className={classes.download} onClick={createCSV}>
           <DownloadIcon className={classes.icon} />
         </IconButton>
-      </div>
-    </>
+    </div>
   );
 };
 
