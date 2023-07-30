@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import useStyles from "./navBarStyles";
+import UserMenu from "../userMenu/userMenu";
 
 const SCOUTING_PATH = "/select";
 const DATA_PATH = "/data";
@@ -18,6 +19,7 @@ const NavBar: React.FC = () => {
       <NavLink to={DATA_PATH} className={classes.navLink}>
         {DATA}
       </NavLink>
+      <UserMenu />
     </div>
   );
 };
