@@ -1,14 +1,18 @@
 import { makeStyles } from "tss-react/mui";
 
 const useStyles = makeStyles()({
-    title: {
-        color: '#213547',
-        fontSize: '30px',
-        textTransform: 'capitalize'
-    },
-    changeAmount: {
-        display: 'flex'
-    }
+  changeGp: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    margin: '40px'
+  },
+  title: {
+    fontSize: "30px",
+    color: "#213547",
+    fontWeight: "bold",
+    textTransform: "capitalize"
+  },
 });
 
 export default useStyles;

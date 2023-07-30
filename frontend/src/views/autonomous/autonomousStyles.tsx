@@ -12,6 +12,9 @@ const useStyles = makeStyles()({
         fontSize: '50px',
         color: '#213547',
         textTransform: 'capitalize'
+    },
+    changeGp: {
+        display: 'flex'
     }
 });
 

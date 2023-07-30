@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import axios from "../../axios";
 import { MatchData } from "../../types/matchData";
 import useStyles from "./dataTableStyles";
+import DataObject from "../dataObject/dataObject";
 
 const MAIN_TITLES = [
   "",
@@ -20,7 +21,13 @@ const MAIN_TITLES = [
   "",
   "",
   "",
+  "",
+  "",
+  "",
   "teleop",
+  "",
+  "",
+  "",
   "",
   "",
   "endgame",
@@ -30,16 +37,43 @@ const MAIN_TITLES = [
 const SUB_TITLES = [
   "match",
   "team",
-  "mobility",
   "cones",
+  "",
+  "",
   "cubes",
-  "links",
+  "",
+  "",
+  "mobility",
   "position",
   "cones",
+  "",
+  "",
   "cubes",
-  "links",
+  "",
+  "",
   "position",
   "comments",
+];
+
+const GP_TITLES = [
+  "",
+  "",
+  "top",
+  "middle",
+  "bottom",
+  "top",
+  "middle",
+  "bottom",
+  "",
+  "",
+  "top",
+  "middle",
+  "bottom",
+  "top",
+  "middle",
+  "bottom",
+  "",
+  "",
 ];
 
 const DataTable: React.FC = () => {
@@ -57,6 +91,8 @@ const DataTable: React.FC = () => {
       "\n" +
       SUB_TITLES.join(",") +
       "\n" +
+      GP_TITLES.join(",") +
+      "\n" +
       data
         .map(
           (row) =>
@@ -64,11 +100,19 @@ const DataTable: React.FC = () => {
             "," +
             row.team +
             "," +
-            Object.values(row.autonomous).join(",") +
-            "," +
-            Object.values(row.teleop).join(",") +
-            "," +
-            Object.values(row.endgame).join(",")
+            Object.values(row)
+              .map((value) =>
+                typeof value === "object"
+                  ? Object.values(value)
+                      .map((objectValue) =>
+                        typeof objectValue === "object"
+                          ? Object.values(objectValue as object).join(",")
+                          : objectValue
+                      )
+                      .join(",")
+                  : ""
+              )
+              .join(",")
         )
         .join("\n");
 
@@ -89,29 +133,28 @@ const DataTable: React.FC = () => {
                 <TableCell key={index}>{title}</TableCell>
               ))}
             </TableRow>
+            <TableRow>
+              {GP_TITLES.map((title, index) => (
+                <TableCell key={index}>{title}</TableCell>
+              ))}
+            </TableRow>
           </TableHead>
           <TableBody>
             {data.map((row) => (
               <TableRow key={row._id}>
                 <TableCell>{row.match}</TableCell>
                 <TableCell>{row.team}</TableCell>
-                {Object.values(row.autonomous).map((value, index) => (
-                  <TableCell key={index}>{value.toString()}</TableCell>
-                ))}
-                {Object.values(row.teleop).map((value, index) => (
-                  <TableCell key={index}>{value.toString()}</TableCell>
-                ))}
-                {Object.values(row.endgame).map((value, index) => (
-                  <TableCell key={index}>{value.toString()}</TableCell>
-                ))}
+                <DataObject object={row.autonomous} />
+                <DataObject object={row.teleop} />
+                <DataObject object={row.endgame} />
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-        <IconButton className={classes.download} onClick={createCSV}>
-          <DownloadIcon className={classes.icon} />
-        </IconButton>
+      <IconButton className={classes.download} onClick={createCSV}>
+        <DownloadIcon className={classes.icon} />
+      </IconButton>
     </div>
   );
 };

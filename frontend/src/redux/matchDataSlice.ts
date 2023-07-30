@@ -1,57 +1,83 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import Position from '../types/position';
-import  { PeriodGP,  TeleopState, Periods, PeriodPosition, PositionPeriods, MatchTeam, SelectMatchState, MatchDataState } from '../interfaces/interfaces';
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import Position from "../types/position";
+import {
+  PeriodGP,
+  TeleopState,
+  Periods,
+  PeriodPosition,
+  PositionPeriods,
+  MatchTeam,
+  SelectMatchState,
+  MatchDataState,
+  GpState,
+} from "../interfaces/interfaces";
+
+const initialGp: GpState = {
+  top: 0,
+  middle: 0,
+  bottom: 0,
+};
 
 const initialState: MatchDataState = {
-    match: '',
-    team: '',
-    autonomous: {
-        mobility: false,
-        cones: 0,
-        cubes: 0,
-        links: 0,
-        position: Position.NONE
-    },
-    teleop: {
-        cones: 0,
-        cubes: 0,
-        links: 0
-    },
-    endgame: {
-        position: Position.NONE,
-        comments: ''
-    }
+  user: "",
+  match: "",
+  team: "",
+  autonomous: {
+    mobility: false,
+    cones: initialGp,
+    cubes: initialGp,
+    position: Position.NONE,
+  },
+  teleop: {
+    cones: initialGp,
+    cubes: initialGp,
+  },
+  endgame: {
+    position: Position.NONE,
+    comments: "",
+  },
 };
 
 export const matchDataSlice = createSlice({
-  name: 'matchData',
+  name: "matchData",
   initialState: initialState,
   reducers: {
-    resetMatchData: state => {
-        state.match = initialState.match,
-        state.team = initialState.team,
-        state.autonomous = initialState.autonomous,
-        state.teleop = initialState.teleop,
-        state.endgame = initialState.endgame
+    resetMatchData: (state) => {
+      (state.match = initialState.match),
+        (state.team = initialState.team),
+        (state.autonomous = initialState.autonomous),
+        (state.teleop = initialState.teleop),
+        (state.endgame = initialState.endgame);
     },
     setGPAmount: (state, action: PayloadAction<PeriodGP>) => {
-        state[action.payload.period as keyof Periods][action.payload.gp as keyof TeleopState] = action.payload.amount;
+      state[action.payload.period as keyof Periods][
+        action.payload.gp as keyof TeleopState
+      ][action.payload.row as keyof GpState] = action.payload.amount;
     },
     setPosition: (state, action: PayloadAction<PeriodPosition>) => {
-        state[action.payload.period as keyof PositionPeriods].position = action.payload.position;
+      state[action.payload.period as keyof PositionPeriods].position =
+        action.payload.position;
     },
     setMobility: (state, action: PayloadAction<boolean>) => {
-        state.autonomous.mobility = action.payload;
+      state.autonomous.mobility = action.payload;
     },
     setComments: (state, action: PayloadAction<string>) => {
-        state.endgame.comments = action.payload;
+      state.endgame.comments = action.payload;
     },
     setMatchTeam: (state, action: PayloadAction<MatchTeam>) => {
-        state[action.payload.name as keyof SelectMatchState] = action.payload.input;
-    }
-  }
-})
+      state[action.payload.name as keyof SelectMatchState] =
+        action.payload.input;
+    },
+  },
+});
 
-export const { resetMatchData, setGPAmount, setPosition, setMobility, setComments, setMatchTeam } = matchDataSlice.actions;
+export const {
+  resetMatchData,
+  setGPAmount,
+  setPosition,
+  setMobility,
+  setComments,
+  setMatchTeam,
+} = matchDataSlice.actions;
 
 export default matchDataSlice.reducer;
