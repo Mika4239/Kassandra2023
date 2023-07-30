@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import matchDataReducer from "./matchDataSlice";
 import currentUserReducer from "./currentUserSlice";
 import storage from "redux-persist/lib/storage";
@@ -10,11 +10,13 @@ const persistConfig = {
   storage,
 };
 
+const reducers = combineReducers({
+  matchData: matchDataReducer,
+  user: currentUserReducer
+})
+
 const store = configureStore({
-  reducer: {
-    matchData: persistReducer(persistConfig, matchDataReducer),
-    user: persistReducer(persistConfig, currentUserReducer)
-  },
+  reducer: persistReducer(persistConfig, reducers)  
 });
 
 export type RootState = ReturnType<typeof store.getState>;
