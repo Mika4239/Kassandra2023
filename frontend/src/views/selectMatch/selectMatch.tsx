@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks";
 import { useDispatch } from "react-redux";
-import { resetMatchData } from "../../redux/matchDataSlice";
+import { resetMatchData, setMatchTeam } from "../../redux/matchDataSlice";
 import NavBar from "../../components/navBar/navBar";
 
 const SELECT_MATCH = "Select Match";
@@ -16,6 +16,8 @@ const TEAM = "team";
 const START = "Start";
 const NEXT_PATH = "/autonomous";
 
+const USER = 'user';
+
 const SelectMatch: React.FC = () => {
   const { classes } = useStyles();
 
@@ -23,6 +25,7 @@ const SelectMatch: React.FC = () => {
   const [teams, setTeams] = useState<string[]>([]);
 
   const match = useAppSelector((state) => state.matchData.match);
+  const userId = useAppSelector((state) => state.user._id);
   const dispatch = useDispatch();
 
   const getData = async <T,>(url: string): Promise<T> => {
@@ -62,6 +65,10 @@ const SelectMatch: React.FC = () => {
         );
   }, [match]);
 
+  const start = () => {
+    dispatch(setMatchTeam({name: USER, input: userId}));
+  }
+
   return (
     <>
       <NavBar />
@@ -70,7 +77,7 @@ const SelectMatch: React.FC = () => {
         <SelectFromData name={MATCH} data={matches} />
         <SelectFromData name={TEAM} data={teams} />
         <NavLink to={NEXT_PATH}>
-          <Button variant="contained">{START}</Button>
+          <Button variant="contained" onClick={start}>{START}</Button>
         </NavLink>
       </div>
     </>
