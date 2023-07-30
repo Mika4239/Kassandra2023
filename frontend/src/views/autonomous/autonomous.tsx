@@ -7,7 +7,6 @@ import useStyles from "./autonomousStyles";
 
 const CONES = "cones";
 const CUBES = "cubes";
-const LINKS = "links";
 
 const AUTONOMOUS = "autonomous";
 
@@ -23,9 +22,10 @@ const Autonomous: React.FC = () => {
       <div className={classes.autonomousPage}>
         <h1 className={classes.title}>{AUTONOMOUS}</h1>
         <CheckMobility />
-        <ChangeGP gp={CONES} period={AUTONOMOUS} />
-        <ChangeGP gp={CUBES} period={AUTONOMOUS} />
-        <ChangeGP gp={LINKS} period={AUTONOMOUS} />
+        <div className={classes.changeGp}>
+          <ChangeGP gp={CONES} period={AUTONOMOUS} />
+          <ChangeGP gp={CUBES} period={AUTONOMOUS} />
+        </div>
         <ChoosePosition period={AUTONOMOUS} />
         <NavButtons prevPath={PREV_PATH} nextPath={NEXT_PATH} />
       </div>

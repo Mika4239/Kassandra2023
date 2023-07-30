@@ -19,16 +19,32 @@ const matchDataSchema = new Schema({
       required: true,
     },
     cones: {
-      type: Number,
-      required: true,
+      top: {
+        type: Number,
+        required: true,
+      },
+      middle: {
+        type: Number,
+        required: true,
+      },
+      bottom: {
+        type: Number,
+        required: true,
+      },
     },
     cubes: {
-      type: Number,
-      required: true,
-    },
-    links: {
-      type: Number,
-      Required: true,
+      top: {
+        type: Number,
+        required: true,
+      },
+      middle: {
+        type: Number,
+        required: true,
+      },
+      bottom: {
+        type: Number,
+        required: true,
+      },
     },
     position: {
       type: String,
@@ -37,16 +53,32 @@ const matchDataSchema = new Schema({
   },
   teleop: {
     cones: {
-      type: Number,
-      required: true,
+      top: {
+        type: Number,
+        required: true,
+      },
+      middle: {
+        type: Number,
+        required: true,
+      },
+      bottom: {
+        type: Number,
+        required: true,
+      },
     },
     cubes: {
-      type: Number,
-      required: true,
-    },
-    links: {
-      type: Number,
-      Required: true,
+      top: {
+        type: Number,
+        required: true,
+      },
+      middle: {
+        type: Number,
+        required: true,
+      },
+      bottom: {
+        type: Number,
+        required: true,
+      },
     },
   },
   endgame: {

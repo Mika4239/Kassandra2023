@@ -1,63 +1,69 @@
 import Position from "../types/position";
 
 export interface PeriodGP {
-    gp: string;
-    period: string;
-    amount: number;
+  row: string;
+  gp: string;
+  period: string;
+  amount: number;
 }
 
 export interface PeriodPosition {
-    period: string;
-    position: Position;
+  period: string;
+  position: Position;
+}
+
+export interface GpState {
+  top: number;
+  middle: number;
+  bottom: number;
 }
 
 export interface AutonomousState {
-    mobility: boolean;
-    cones: number;
-    cubes: number;
-    links: number;
-    position: Position;
+  mobility: boolean;
+  cones: GpState;
+  cubes: GpState;
+  position: Position;
 }
 
 export interface TeleopState {
-        cones: number;
-        cubes: number;
-        links: number;
+  cones: GpState;
+  cubes: GpState;
 }
 
 export interface EndgameState {
-    position: Position;
-    comments: string;
+  position: Position;
+  comments: string;
 }
 
 export interface MatchDataState {
-    match: string;
-    team: string;
-    autonomous: AutonomousState,
-    teleop: TeleopState,
-    endgame: EndgameState
-};
+  user: string;
+  match: string;
+  team: string;
+  autonomous: AutonomousState;
+  teleop: TeleopState;
+  endgame: EndgameState;
+}
 
 export interface Periods {
-    autonomous: AutonomousState,
-    teleop: TeleopState
+  autonomous: AutonomousState;
+  teleop: TeleopState;
 }
 
 export interface PositionPeriods {
-    autonomous: {
-        position: Position
-    },
-    endgame: {
-        position: Position
-    }
+  autonomous: {
+    position: Position;
+  };
+  endgame: {
+    position: Position;
+  };
 }
 
 export interface MatchTeam {
-    name: string;
-    input: string;
+  name: string;
+  input: string;
 }
 
 export interface SelectMatchState {
-    team: string;
-    match: string;
+  team: string;
+  match: string;
 }

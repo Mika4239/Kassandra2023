@@ -1,46 +1,21 @@
-import { IconButton, TextField } from "@mui/material";
-import useStyles from "./changeGPStyles";
-import RemoveIcon from "@mui/icons-material/Remove";
-import AddIcon from "@mui/icons-material/Add";
-import { useAppSelector } from "../../redux/hooks";
-import { TeleopState, Periods } from "../../interfaces/interfaces";
-import { useDispatch } from "react-redux";
-import { setGPAmount } from "../../redux/matchDataSlice";
+import ChangeGPRow from "../changeGPRow/changeGPRow";
+import useStyles from "./changeGpStyles";
+
+const TOP = "top";
+const MIDDLE = "middle";
+const BOTTOM = "bottom";
 
 const ChangeGP: React.FC<ChangeGPProps> = (props) => {
-  const { classes } = useStyles();
   const { gp, period } = props;
-
-  const gpAmount = useAppSelector(
-    (state) => state.matchData[period as keyof Periods][gp as keyof TeleopState]
-  );
-  const dispatch = useDispatch();
-
-  const changeAmount = (amount: number) => {
-    dispatch(setGPAmount({
-        period: period,
-        gp: gp,
-        amount: amount
-      }))
-  }
+  const { classes } = useStyles();
 
   return (
-    <>
+    <div className={classes.changeGp}>
       <h2 className={classes.title}>{gp}</h2>
-      <div className={classes.changeAmount}>
-        <IconButton onClick={() => changeAmount(gpAmount - 1)}>
-          <RemoveIcon />
-        </IconButton>
-        <TextField
-          type="number"
-          value={gpAmount}
-          onChange={(event) => changeAmount(Number(event.target.value))}
-        />
-        <IconButton onClick={() => changeAmount(gpAmount + 1)}>
-          <AddIcon />
-        </IconButton>
-      </div>
-    </>
+      <ChangeGPRow gp={gp} period={period} row={TOP} />
+      <ChangeGPRow gp={gp} period={period} row={MIDDLE} />
+      <ChangeGPRow gp={gp} period={period} row={BOTTOM} />
+    </div>
   );
 };
 
