@@ -1,6 +1,10 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model } = require("mongoose");
 
 const matchDataSchema = new Schema({
+  user: {
+    type: String,
+    required: true,
+  },
   match: {
     type: String,
     required: true,
@@ -56,7 +60,6 @@ const matchDataSchema = new Schema({
   },
 });
 
-// 3. Create a Model.
 const MatchData = model("matchData", matchDataSchema);
 
 module.exports = MatchData;

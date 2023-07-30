@@ -1,18 +1,24 @@
-import { makeStyles } from 'tss-react/mui';
+import { makeStyles } from "tss-react/mui";
 
 const useStyles = makeStyles()({
-    selectPage: {
+    loginPage: {
         display: 'flex',
         flexDirection: 'column',
         width: '100vw',
-        height: '70vh',
+        height: '100vh',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        fontFamily: 'Helvetica'
     },
     title: {
-        fontFamily: 'Helvetica',
         fontSize: '50px',
         color: '#213547'
+    },
+    signInput: {
+        margin: '10px'
+    },
+    signButton: {
+        margin: '20px'
     }
 });
 

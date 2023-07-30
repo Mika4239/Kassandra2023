@@ -1,9 +1,22 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+const userController = require('../controllers/userController');
+
+router.get('/', async (req, res) => {
+  res.json(await userController.getAllUsers());
+});
+
+router.get('/user/:username', async (req, res) => {
+  res.json(await userController.getUser(req.params.username));
+});
+
+router.post('/check', async (req, res) => {
+  res.json(await userController.checkUser(req.body.username, req.body.password));
+});
+
+router.post('/', async (req, res) => {
+  res.json(await userController.addUser(req.body));
 });
 
 module.exports = router;
