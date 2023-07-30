@@ -13,7 +13,7 @@ const persistConfig = {
 const reducers = combineReducers({
   matchData: matchDataReducer,
   user: currentUserReducer
-})
+});
 
 const store = configureStore({
   reducer: persistReducer(persistConfig, reducers)  
