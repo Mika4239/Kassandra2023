@@ -5,9 +5,10 @@ const useStyles = makeStyles()({
         display: 'flex',
         justifyContent: 'space-between'
     },
-    logout: {
+    navLink: {
         textDecoration: 'none',
-        color: 'black'
+        color: 'black',
+        display: 'flex'
     }
 });
 
