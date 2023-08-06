@@ -24,3 +24,9 @@ module.exports.updateTeam = async (id, team) => {
 
   return { success: `id: ${id}, team: ${team}`};
 };
+
+module.exports.deleteTeam = async (id) => {
+  User.updateOne({_id: id}, {$unset: {team: 1 }}).exec();
+
+  return { success: id };
+}

@@ -23,4 +23,8 @@ router.put('/updateTeam', async (req, res) => {
   res.json(await userController.updateTeam(req.body.id, req.body.team));
 });
 
+router.put('/deleteTeam', async (req, res) => {
+  res.json(await userController.deleteTeam(req.body.id));
+});
+
 module.exports = router;

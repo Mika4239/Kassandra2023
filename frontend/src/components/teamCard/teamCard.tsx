@@ -29,6 +29,13 @@ const TeamCard: React.FC<TeamCardProps> = (props) => {
     });
   };
 
+  const removeTeam = () => {
+    dispatch(updateTeam(''));
+    axios.put('/users/deleteTeam', {
+      id: currentUser._id
+    });
+  }
+
   return (
     <Card className={classes.teamCard}>
       <CardHeader title={name} subheader={number} />
@@ -43,7 +50,7 @@ const TeamCard: React.FC<TeamCardProps> = (props) => {
           <GroupAddIcon />
         </IconButton>
         {currentUser.team === _id && (
-          <IconButton>
+          <IconButton onClick={removeTeam}>
             <GroupRemoveIcon />
           </IconButton>
         )}
