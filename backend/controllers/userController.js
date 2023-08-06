@@ -18,3 +18,9 @@ module.exports.addUser = async (data) => {
 
   return { success: user.id };
 };
+
+module.exports.updateTeam = async (id, team) => {
+  await User.findByIdAndUpdate(id, {team: team});
+
+  return { success: `id: ${id}, team: ${team}`};
+};

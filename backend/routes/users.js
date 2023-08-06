@@ -19,4 +19,8 @@ router.post('/', async (req, res) => {
   res.json(await userController.addUser(req.body));
 });
 
+router.put('/updateTeam', async (req, res) => {
+  res.json(await userController.updateTeam(req.body.id, req.body.team));
+});
+
 module.exports = router;
