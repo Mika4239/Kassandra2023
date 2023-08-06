@@ -1,5 +1,4 @@
 import Logout from "@mui/icons-material/Logout";
-import Settings from "@mui/icons-material/Settings";
 import Groups from "@mui/icons-material/Groups";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
@@ -16,7 +15,6 @@ import { resetUser } from "../../redux/currentUserSlice";
 
 const PROFILE = "Profile";
 const GROUPS = "Teams";
-const SETTINGS = "Settings";
 const LOGOUT = "Logout";
 
 const LOGIN_PATH = "/";
@@ -52,8 +50,9 @@ const UserMenu: React.FC = () => {
         onClose={handleClose}
         onClick={handleClose}
       >
-        <MenuItem onClick={handleClose} className={classes.profile}>
+        <MenuItem onClick={handleClose}>
           <Avatar
+            className={classes.profile}
             src={`https://ui-avatars.com/api/?name=${currentUser.firstName}+${currentUser.lastName}`}
           />
           {PROFILE}
@@ -66,12 +65,6 @@ const UserMenu: React.FC = () => {
             </ListItemIcon>
             {GROUPS}
           </NavLink>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Settings />
-          </ListItemIcon>
-          {SETTINGS}
         </MenuItem>
         <NavLink
           to={LOGIN_PATH}
