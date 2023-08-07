@@ -11,6 +11,7 @@ import {
 } from "recharts";
 import axios from "../../axios";
 import SelectGraph from "../selectGraph/selectGraph";
+import { useAppSelector } from "../../redux/hooks";
 
 interface NumberData {
   _id: string;
@@ -18,14 +19,19 @@ interface NumberData {
 }
 
 const DataGraph = () => {
+  const currentUserTeam = useAppSelector((state) => state.user.team);
   const [data, setData] = useState<NumberData[]>([]);
-  const [key, setKey] = useState<string>('');
+  const [key, setKey] = useState<string>("");
 
   useEffect(() => {
     if (key !== "") {
+      const initialBody = {
+        team: currentUserTeam,
+      };
+
       if (key.includes("mobility")) {
         axios
-          .get("/matchData/mobility")
+          .post("/matchData/mobility", initialBody)
           .then((response) => setData(response.data));
       } else {
         const isCount = key.includes("position");
@@ -33,10 +39,12 @@ const DataGraph = () => {
         const splitKey = key.split(".");
         const body = isCount
           ? {
+              ...initialBody,
               period: splitKey[0],
               position: splitKey[splitKey.length - 1],
             }
           : {
+              ...initialBody,
               path: key,
             };
         axios
