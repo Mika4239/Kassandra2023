@@ -34,13 +34,13 @@ const AddTeamDialog: React.FC<AddTeamDialogProps> = (props) => {
       number: number || -1,
       description: description,
       image: image,
-      admin: [currentUserId]
+      admin: currentUserId ? [currentUserId] : []
     };
 
     axios.post('/teams', newTeam);
     setTeams(prev => [...prev, newTeam]);
     setOpen(false);
-  }
+  };
 
   return (
     <div>
