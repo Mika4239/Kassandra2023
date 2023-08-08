@@ -1,6 +1,5 @@
 import Logout from "@mui/icons-material/Logout";
-import Settings from "@mui/icons-material/Settings";
-import Group from "@mui/icons-material/Group";
+import Groups from "@mui/icons-material/Groups";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -15,11 +14,11 @@ import { useDispatch } from "react-redux";
 import { resetUser } from "../../redux/currentUserSlice";
 
 const PROFILE = "Profile";
-const GROUPS = "Groups";
-const SETTINGS = "Settings";
+const GROUPS = "Teams";
 const LOGOUT = "Logout";
 
-const LOGIN = "/";
+const LOGIN_PATH = "/";
+const TEAMS_PATH = "/teams";
 
 const UserMenu: React.FC = () => {
   const { classes } = useStyles();
@@ -51,32 +50,33 @@ const UserMenu: React.FC = () => {
         onClose={handleClose}
         onClick={handleClose}
       >
-        <MenuItem onClick={handleClose} className={classes.profile}>
+        <MenuItem onClick={handleClose}>
           <Avatar
+            className={classes.profile}
             src={`https://ui-avatars.com/api/?name=${currentUser.firstName}+${currentUser.lastName}`}
           />
           {PROFILE}
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Group />
-          </ListItemIcon>
-          {GROUPS}
+          <NavLink to={TEAMS_PATH} className={classes.navLink}>
+            <ListItemIcon>
+              <Groups />
+            </ListItemIcon>
+            {GROUPS}
+          </NavLink>
         </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Settings />
-          </ListItemIcon>
-          {SETTINGS}
-        </MenuItem>
-        <NavLink to={LOGIN} onClick={() => dispatch(resetUser())} className={classes.logout}>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Logout />
-          </ListItemIcon>
-          {LOGOUT}
-        </MenuItem>
+        <NavLink
+          to={LOGIN_PATH}
+          onClick={() => dispatch(resetUser())}
+          className={classes.navLink}
+        >
+          <MenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <Logout />
+            </ListItemIcon>
+            {LOGOUT}
+          </MenuItem>
         </NavLink>
       </Menu>
     </>

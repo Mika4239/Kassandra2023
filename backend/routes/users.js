@@ -11,12 +11,24 @@ router.get('/user/:username', async (req, res) => {
   res.json(await userController.getUser(req.params.username));
 });
 
+router.get('/team/:team', async (req, res) => {
+  res.json(await userController.getAllUsersByTeam(req.params.team));
+});
+
 router.post('/check', async (req, res) => {
   res.json(await userController.checkUser(req.body.username, req.body.password));
 });
 
 router.post('/', async (req, res) => {
   res.json(await userController.addUser(req.body));
+});
+
+router.put('/updateTeam', async (req, res) => {
+  res.json(await userController.updateTeam(req.body.id, req.body.team));
+});
+
+router.put('/deleteTeam', async (req, res) => {
+  res.json(await userController.deleteTeam(req.body.id));
 });
 
 module.exports = router;

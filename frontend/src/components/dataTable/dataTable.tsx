@@ -12,6 +12,7 @@ import axios from "../../axios";
 import { MatchData } from "../../types/matchData";
 import useStyles from "./dataTableStyles";
 import DataObject from "../dataObject/dataObject";
+import { useAppSelector } from "../../redux/hooks";
 
 const MAIN_TITLES = [
   "",
@@ -79,10 +80,12 @@ const GP_TITLES = [
 const DataTable: React.FC = () => {
   const { classes } = useStyles();
 
+  const currentUserTeam = useAppSelector(state => state.user.team);
+
   const [data, setData] = useState<MatchData[]>([]);
 
   useEffect(() => {
-    axios.get("/matchData").then((response) => setData(response.data));
+    axios.get(`/matchData/all/${currentUserTeam}`).then((response) => setData(response.data));
   }, []);
 
   const createCSV = () => {

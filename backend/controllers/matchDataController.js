@@ -1,9 +1,11 @@
 const MatchData = require("../schemas/matchData");
+const userController = require("./userController");
 
 const POSITIONS = ["NONE", "DOCKED", "ENGAGED", "PARK"];
 
-module.exports.getAllData = async () => {
-  return await MatchData.find({});
+module.exports.getAllData = async (team) => {
+  const teamUsers = await userController.getAllUsersByTeam(team);
+  return await MatchData.find({ user: teamUsers });
 };
 
 module.exports.getKeys = () => {
@@ -22,13 +24,25 @@ module.exports.getKeys = () => {
   return keys;
 };
 
-module.exports.getMobility = async () => {
+module.exports.getMobility = async (team) => {
+  const teamUsers = (await userController.getAllUsersByTeam(team)).map(id => id.toString());
   return await MatchData.aggregate([
     {
       $match: {
-        'autonomous.mobility': {
-          $eq: true,
-        },
+        $and: [
+          {
+            user: {
+              $elemMatch: {
+                $in: teamUsers,
+              },
+            },
+          },
+          {
+            "autonomous.mobility": {
+              $eq: true,
+            },
+          },
+        ],
       },
     },
     {
@@ -42,13 +56,21 @@ module.exports.getMobility = async () => {
   ]);
 };
 
-module.exports.getAverageData = async (path) => {
+module.exports.getAverageData = async (data) => {
+  const teamUsers = (await userController.getAllUsersByTeam(data.team)).map(id => id.toString());
   return await MatchData.aggregate([
+    {
+      $match: {
+        user: {
+          $in: teamUsers
+        },
+      },
+    },
     {
       $group: {
         _id: "$team",
         number: {
-          $avg: `$${path}`,
+          $avg: `$${data.path}`,
         },
       },
     },
@@ -56,12 +78,22 @@ module.exports.getAverageData = async (path) => {
 };
 
 module.exports.getCount = async (data) => {
+  const teamUsers = (await userController.getAllUsersByTeam(data.team)).map(id => id.toString());
   return await MatchData.aggregate([
     {
       $match: {
-        [`${data.period}.position`]: {
-          $eq: data.position,
-        },
+        $and: [
+          {
+            user: {
+              $in: teamUsers,
+            },
+          },
+          {
+            [`${data.period}.position`]: {
+              $eq: data.position,
+            },
+          },
+        ],
       },
     },
     {

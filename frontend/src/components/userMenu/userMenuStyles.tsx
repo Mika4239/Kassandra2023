@@ -2,12 +2,12 @@ import { makeStyles } from "tss-react/mui";
 
 const useStyles = makeStyles()({
     profile: {
-        display: 'flex',
-        justifyContent: 'space-between'
+        marginRight: '10px'
     },
-    logout: {
+    navLink: {
         textDecoration: 'none',
-        color: 'black'
+        color: 'black',
+        display: 'flex'
     }
 });
 
