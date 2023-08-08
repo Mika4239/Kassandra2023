@@ -10,6 +10,7 @@ import useStyles from "./signUpDialogStyles";
 import { IconButton } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import SelectTeam from "../selectTeam/selectTeam";
 
 const SIGN_UP = "Sign Up";
 
@@ -90,6 +91,7 @@ const SignUpDialog: React.FC<SignUpDialogProps> = (props) => {
             ),
           }}
         />
+        <SelectTeam team={team} setTeam={setTeam} />
       </DialogContent>
       <DialogActions>
         <Button onClick={() => setOpen(false)}>{CANCEL}</Button>
