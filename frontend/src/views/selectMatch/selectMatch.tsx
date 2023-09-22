@@ -32,7 +32,7 @@ const SelectMatch: React.FC = () => {
     const resp = await fetch(url, {
       headers: {
         "X-TBA-Auth-Key":
-          "YwrN3ZwfFtrn5XniP4zwpDpLCOiaC04rLlzuF0yC5MYEPPErbTHkXfUOptnl13WK", // TODO: find a way to add key with .env
+          import.meta.env.VITE_TBA_AUTH_KEY
       },
     });
     return resp.json();
@@ -66,7 +66,7 @@ const SelectMatch: React.FC = () => {
   }, [match]);
 
   const start = () => {
-    dispatch(setMatchTeam({name: USER, input: userId}));
+    dispatch(setMatchTeam({name: USER, input: userId || ""}));
   }
 
   return (
