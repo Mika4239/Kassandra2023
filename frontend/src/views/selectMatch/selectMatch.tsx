@@ -66,7 +66,7 @@ const SelectMatch: React.FC = () => {
     )
       .catch((error) => console.log(error))
       .then(
-        (response) => response && setMatches(response.map((event) => event.key))
+        (response) => response && setMatches(response.sort((a, b) => a.predicted_time - b.predicted_time).map((event) => event.key))
       );
   }, []);
 
