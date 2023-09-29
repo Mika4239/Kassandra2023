@@ -35,7 +35,7 @@ const Teams: React.FC = () => {
         </Button>
         <AddTeamDialog open={open} setOpen={setOpen} setTeams={setTeams} />
         {teams.map((team) => (
-          <TeamCard team={team} />
+          <TeamCard team={team} key={team.id} />
         ))}
       </div>
     </>
