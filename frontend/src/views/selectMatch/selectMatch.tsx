@@ -18,6 +18,26 @@ const NEXT_PATH = "/autonomous";
 
 const USER = 'user';
 
+const TbaKeys =  {
+  "qm": "qualification match",
+  "ef": "eighth finals",
+  "qf": "quarterfinals",
+  "sf": "semifinals",
+  "f": "finals",
+  "m": "match"
+};
+
+const translateMatch = (key: string) => {
+  const tbaKeyArr = (key.split("_")[1]).split(/(\d+)/);
+  // all the even places in the array are strings and odds places are numbers, so we need to translate only the strings
+  return tbaKeyArr.map((matchKey, index) => index % 2 == 0 ? TbaKeys[matchKey as keyof(typeof TbaKeys)] : matchKey).join(" ");
+};
+
+const translateTeam = (key: string, index?: number) => {
+  const alliance = index as number < 3 ? "blue" : "red";
+  return `${alliance} ${index as number + 1} - ${key.replace("frc", "")}`;
+}
+
 const SelectMatch: React.FC = () => {
   const { classes } = useStyles();
 
@@ -74,8 +94,8 @@ const SelectMatch: React.FC = () => {
       <NavBar />
       <div className={classes.selectPage}>
         <h1 className={classes.title}>{SELECT_MATCH}</h1>
-        <SelectFromData name={MATCH} data={matches} />
-        <SelectFromData name={TEAM} data={teams} />
+        <SelectFromData name={MATCH} data={matches} dataTranslate={translateMatch} />
+        <SelectFromData name={TEAM} data={teams} dataTranslate={translateTeam} />
         <NavLink to={NEXT_PATH}>
           <Button variant="contained" onClick={start}>{START}</Button>
         </NavLink>
