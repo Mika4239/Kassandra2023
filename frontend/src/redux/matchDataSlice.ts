@@ -20,6 +20,7 @@ const initialGp: GpState = {
 
 const initialState: MatchDataState = {
   user: "",
+  event: "",
   match: "",
   team: "",
   autonomous: {
@@ -65,6 +66,13 @@ export const matchDataSlice = createSlice({
       state.endgame.comments = action.payload;
     },
     setMatchTeam: (state, action: PayloadAction<MatchTeam>) => {
+      if(action.payload.name == "event") {
+        state.match = "";
+        state.team = "";
+      }
+      if(action.payload.name == "match") {
+        state.team = "";
+      }
       state[action.payload.name as keyof SelectMatchState] =
         action.payload.input;
     },
