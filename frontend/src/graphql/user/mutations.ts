@@ -5,3 +5,11 @@ mutation createUser($firstName: String!, $lastName: String!, $username: String!,
     }
 }
 `;
+
+export const updateUserTeam = `
+mutation MyMutation($id: ID!, $team: String = "") {
+    updateUser(input: {id: $id, team: $team}){
+      id
+    }
+  }
+`;
