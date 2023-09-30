@@ -12,3 +12,13 @@ query checkUser($username: String!, $password: String!) {
     }
   }
 `;
+
+export const allUsersByTeam = `
+query listUsersByTeam($team: String!) {
+    listUsers(filter: {team: {eq: $team}}){
+        items{
+          id
+        }
+    }
+}
+`;
