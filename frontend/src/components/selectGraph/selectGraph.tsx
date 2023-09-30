@@ -3,10 +3,25 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useEffect, useState } from "react";
-import axios from "../../axios";
 import useStyles from "./selectGraphStyles";
+import { useAppSelector } from "../../redux/hooks";
 
 const GRAPH = "Graph";
+
+const getAllKeys = (data: Object, keys: string[], keyString: string) => {
+  if(typeof data == 'object'){
+    Object.keys(data).forEach(key => {
+      const value = data[key as keyof Object];
+      if(typeof value === 'object'){
+         getAllKeys(value, keys, keyString + key + ".");
+      }
+      else{
+        keys.push(keyString + key);
+      }
+   });
+  }
+  return keys;
+}
 
 const SelectGraph: React.FC<SelectGraphProps> = (props) => {
   const { setKey } = props;
@@ -15,8 +30,10 @@ const SelectGraph: React.FC<SelectGraphProps> = (props) => {
   const [chosen, setChosen] = useState<string>('');
   const [keys, setKeys] = useState<String[]>([]);
 
+  const matchData = useAppSelector(state => state.matchData);
+
   useEffect(() => {
-    axios.get("/matchData/keys").then((response) => setKeys(response.data));
+    setKeys(getAllKeys(matchData, [], ""));
   }, []);
 
   const handleChange = (e: SelectChangeEvent) => {
