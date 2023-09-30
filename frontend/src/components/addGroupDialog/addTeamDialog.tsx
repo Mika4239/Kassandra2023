@@ -7,7 +7,9 @@ import DialogTitle from "@mui/material/DialogTitle";
 import React, { useState } from "react";
 import useStyles from "./addTeamDialogStyles";
 import { useAppSelector } from "../../redux/hooks";
-import axios from "../../axios";
+import executeQuery from "../../graphql/graphqlClient";
+import { createTeam } from "../../graphql/team/mutations";
+import { CreateTeam, CreateTeamInput } from "../../graphql/team/interfaces";
 
 const TTILE = "Add Team";
 const NAME = "Name";
@@ -28,8 +30,8 @@ const AddTeamDialog: React.FC<AddTeamDialogProps> = (props) => {
   const [description, setDescription] = useState<string>("");
   const [image, setImage] = useState<string>("");
 
-  const addTeam = () => {
-    const newTeam: Team = {
+  const addTeam = async () => {
+    const newTeam: CreateTeamInput = {
       name: name,
       number: number || -1,
       description: description,
@@ -37,8 +39,8 @@ const AddTeamDialog: React.FC<AddTeamDialogProps> = (props) => {
       admin: currentUserId ? [currentUserId] : []
     };
 
-    axios.post('/teams', newTeam);
-    setTeams(prev => [...prev, newTeam]);
+    const newTeamId = await executeQuery<CreateTeam>(createTeam, newTeam).then(response => response && response["createTeam"]["id"]);
+    newTeamId && setTeams(prev => [...prev, {id: newTeamId, ...newTeam}]);
     setOpen(false);
   };
 
