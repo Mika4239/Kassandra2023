@@ -5,12 +5,14 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
-import axios from "../../axios";
 import useStyles from "./signUpDialogStyles";
 import { IconButton } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import SelectTeam from "../selectTeam/selectTeam";
+import executeQuery from "../../graphql/graphqlClient";
+import { createUser } from "../../graphql/user/mutations";
+import { CreateUser, CreateUserInput } from "../../graphql/user/interfaces";
 
 const SIGN_UP = "Sign Up";
 
@@ -34,7 +36,7 @@ const SignUpDialog: React.FC<SignUpDialogProps> = (props) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const addUser = () => {
-    const user: User = {
+    const user: CreateUserInput = {
       firstName: firstName,
       lastName: lastName,
       username: username,
@@ -48,7 +50,7 @@ const SignUpDialog: React.FC<SignUpDialogProps> = (props) => {
         }
       : user;
 
-    axios.post("/users", newUser);
+    executeQuery<CreateUser>(createUser, newUser);
     setOpen(false);
   };
 

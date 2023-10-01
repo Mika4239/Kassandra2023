@@ -14,15 +14,6 @@ const teamRouter = require('./routes/team');
 const app = express();
 
 require("dotenv").config(); 
-const mongoose = require('mongoose');
-
-mongoose.connect(
-  process.env.MONGODB_URI, 
-  {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-  }
-);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

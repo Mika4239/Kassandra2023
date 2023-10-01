@@ -2,7 +2,8 @@ import { Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import useStyles from "./navButtonsStyles";
 import { useAppSelector } from "../../redux/hooks";
-import axios from "../../axios";
+import executeQuery from "../../graphql/graphqlClient";
+import { createMatchData } from "../../graphql/matchData/mutations";
 
 const BACK = 'Back';
 const NEXT = 'Next';
@@ -19,7 +20,14 @@ const NavButtons: React.FC<NavButtonsProps> = (props) => {
     const matchData = useAppSelector(state => state.matchData);
 
     const addMatch = () => {
-        axios.post('/matchData', matchData);
+        const matchDataDB = {
+            ...matchData,
+            "autonomous": JSON.stringify(matchData.autonomous),
+            "teleop": JSON.stringify(matchData.teleop),
+            "endgame": JSON.stringify(matchData.endgame)
+        };
+
+        executeQuery(createMatchData, matchDataDB);
     }
 
     return (

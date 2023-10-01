@@ -3,7 +3,9 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import React, { useEffect, useState } from "react";
-import axios from "../../axios";
+import executeQuery from "../../graphql/graphqlClient";
+import { getAllTeams } from "../../graphql/team/queries";
+import { AllTeams } from "../../graphql/team/interfaces";
 
 const TEAM = "Team";
 const LABEL = "team-label";
@@ -14,7 +16,7 @@ const SelectTeam: React.FC<SelectTeamProps> = (props) => {
   const [teams, setTeams] = useState<Team[]>([]);
 
   useEffect(() => {
-    axios.get("/teams").then((response) => setTeams(response.data));
+    executeQuery<AllTeams>(getAllTeams).then(response => response && setTeams(response["listTeams"]["items"]));
   }, []);
 
   return (
@@ -27,7 +29,7 @@ const SelectTeam: React.FC<SelectTeamProps> = (props) => {
         onChange={(e) => setTeam(e.target.value)}
       >
         {teams.map((team) => (
-          <MenuItem key={team._id} value={team._id}>
+          <MenuItem key={team.id} value={team.id}>
             {team.name + " - " + team.number}
           </MenuItem>
         ))}

@@ -1,18 +1,14 @@
+import DownloadIcon from "@mui/icons-material/Download";
+import { IconButton } from "@mui/material";
+import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import { IconButton } from "@mui/material";
-import DownloadIcon from "@mui/icons-material/Download";
-import { useEffect, useState } from "react";
-import axios from "../../axios";
-import { MatchData } from "../../types/matchData";
+import { DataTableProps } from "./dataTableProps";
 import useStyles from "./dataTableStyles";
-import DataObject from "../dataObject/dataObject";
-import { useAppSelector } from "../../redux/hooks";
 
 const MAIN_TITLES = [
   "",
@@ -77,16 +73,9 @@ const GP_TITLES = [
   "",
 ];
 
-const DataTable: React.FC = () => {
+const DataTable: React.FC<DataTableProps> = (props) => {
   const { classes } = useStyles();
-
-  const currentUserTeam = useAppSelector(state => state.user.team);
-
-  const [data, setData] = useState<MatchData[]>([]);
-
-  useEffect(() => {
-    axios.get(`/matchData/all/${currentUserTeam}`).then((response) => setData(response.data));
-  }, []);
+  const { data } = props;
 
   const createCSV = () => {
     const csv: string =
@@ -103,19 +92,38 @@ const DataTable: React.FC = () => {
             "," +
             row.team +
             "," +
-            Object.values(row)
-              .map((value) =>
-                typeof value === "object"
-                  ? Object.values(value)
-                      .map((objectValue) =>
-                        typeof objectValue === "object"
-                          ? Object.values(objectValue as object).join(",")
-                          : objectValue
-                      )
-                      .join(",")
-                  : ""
-              )
-              .join(",")
+            row.autonomous.cones.top +
+            "," +
+            row.autonomous.cones.middle +
+            "," +
+            row.autonomous.cones.bottom +
+            "," +
+            row.autonomous.cubes.top +
+            "," +
+            row.autonomous.cubes.middle +
+            "," +
+            row.autonomous.cubes.bottom +
+            "," +
+            row.autonomous.mobility +
+            "," +
+            row.autonomous.position +
+            "," +
+            row.teleop.cones.top +
+            "," +
+            row.teleop.cones.middle +
+            "," +
+            row.teleop.cones.bottom +
+            "," +
+            row.teleop.cubes.top +
+            "," +
+            row.teleop.cubes.middle +
+            "," +
+            row.teleop.cubes.bottom +
+            "," +
+            row.endgame.position +
+            "," +
+            row.endgame.comments +
+            ","
         )
         .join("\n");
 
@@ -144,12 +152,25 @@ const DataTable: React.FC = () => {
           </TableHead>
           <TableBody>
             {data.map((row) => (
-              <TableRow key={row._id}>
+              <TableRow key={row.id}>
                 <TableCell>{row.match}</TableCell>
                 <TableCell>{row.team}</TableCell>
-                <DataObject object={row.autonomous} />
-                <DataObject object={row.teleop} />
-                <DataObject object={row.endgame} />
+                <TableCell>{row.autonomous.cones.top}</TableCell>
+                <TableCell>{row.autonomous.cones.middle}</TableCell>
+                <TableCell>{row.autonomous.cones.bottom}</TableCell>
+                <TableCell>{row.autonomous.cubes.top}</TableCell>
+                <TableCell>{row.autonomous.cubes.middle}</TableCell>
+                <TableCell>{row.autonomous.cubes.bottom}</TableCell>
+                <TableCell>{row.autonomous.mobility}</TableCell>
+                <TableCell>{row.autonomous.position}</TableCell>
+                <TableCell>{row.teleop.cones.top}</TableCell>
+                <TableCell>{row.teleop.cones.middle}</TableCell>
+                <TableCell>{row.teleop.cones.bottom}</TableCell>
+                <TableCell>{row.teleop.cubes.top}</TableCell>
+                <TableCell>{row.teleop.cubes.middle}</TableCell>
+                <TableCell>{row.teleop.cubes.bottom}</TableCell>
+                <TableCell>{row.endgame.position}</TableCell>
+                <TableCell>{row.endgame.comments}</TableCell>
               </TableRow>
             ))}
           </TableBody>

@@ -12,28 +12,24 @@ import useStyles from "./teamCardStyles";
 import { useAppSelector } from "../../redux/hooks";
 import { useDispatch } from "react-redux";
 import { updateTeam } from "../../redux/currentUserSlice";
-import axios from "../../axios";
+import executeQuery from "../../graphql/graphqlClient";
+import { updateUserTeam } from "../../graphql/user/mutations";
 
 const TeamCard: React.FC<TeamCardProps> = (props) => {
   const { classes } = useStyles();
-  const { _id, name, number, description, image } = props.team;
+  const { id, name, number, description, image } = props.team;
 
   const currentUser = useAppSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const addTeam = () => {
-    dispatch(updateTeam(_id));
-    axios.put('/users/updateTeam', {
-      id: currentUser._id,
-      team: _id
-    });
+    dispatch(updateTeam(id));
+    executeQuery(updateUserTeam, {id: currentUser.id, team: id});
   };
 
   const removeTeam = () => {
     dispatch(updateTeam(''));
-    axios.put('/users/deleteTeam', {
-      id: currentUser._id
-    });
+    executeQuery(updateUserTeam, {id: currentUser.id});
   }
 
   return (
@@ -49,7 +45,7 @@ const TeamCard: React.FC<TeamCardProps> = (props) => {
         <IconButton onClick={addTeam}>
           <GroupAddIcon />
         </IconButton>
-        {currentUser.team === _id && (
+        {currentUser.team === id && (
           <IconButton onClick={removeTeam}>
             <GroupRemoveIcon />
           </IconButton>

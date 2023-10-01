@@ -25,7 +25,7 @@ const SelectMatch: React.FC = () => {
   const [teams, setTeams] = useState<string[]>([]);
 
   const match = useAppSelector((state) => state.matchData.match);
-  const userId = useAppSelector((state) => state.user._id);
+  const userId = useAppSelector((state) => state.user.id);
   const dispatch = useDispatch();
 
   const getData = async <T,>(url: string): Promise<T> => {

@@ -1,12 +1,15 @@
-const Team = require("../schemas/team");
+const executeQuery = require("../graphql/graphqlClient");
+const queries = require("../graphql/team/queries");
+const mutations = require("../graphql/team/mutations");
+const logger = require("../utils/logger");
 
 module.exports.getAllTeams = async () => {
-  return await Team.find({});
+  const response = await executeQuery(queries.getAllTeams);
+  return response ? response["listTeams"]["items"] : [];
 };
 
 module.exports.addTeam = async (data) => {
-  const team = new Team(data);
-  await team.save();
-
-  return { success: team.id };
+  const response = await executeQuery(mutations.createTeam, data);
+  logger.info("created team: " + response["createTeam"]["id"]);
+  return response;
 };
