@@ -101,7 +101,7 @@ const SelectMatch: React.FC = () => {
               )
             )
         );
-  }, [match]);
+  }, [match, event]);
 
   const translateEvent = (key: string) => {
     return events.find((event) => event.key == key)?.name || "";
