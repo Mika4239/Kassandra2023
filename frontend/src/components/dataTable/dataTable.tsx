@@ -1,21 +1,14 @@
+import DownloadIcon from "@mui/icons-material/Download";
+import { IconButton } from "@mui/material";
+import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import { IconButton } from "@mui/material";
-import DownloadIcon from "@mui/icons-material/Download";
-import { useEffect, useState } from "react";
-import { MatchData } from "../../types/matchData";
+import { DataTableProps } from "./dataTableProps";
 import useStyles from "./dataTableStyles";
-import { useAppSelector } from "../../redux/hooks";
-import executeQuery from "../../graphql/graphqlClient";
-import { AllMatchData } from "../../graphql/matchData/queries";
-import { MatchDataList } from "../../graphql/matchData/interfaces";
-import { UsersList } from "../../graphql/user/interfaces";
-import { allUsersByTeam } from "../../graphql/user/queries";
 
 const MAIN_TITLES = [
   "",
@@ -80,37 +73,9 @@ const GP_TITLES = [
   "",
 ];
 
-const DataTable: React.FC = () => {
+const DataTable: React.FC<DataTableProps> = (props) => {
   const { classes } = useStyles();
-
-  const currentUserTeam = useAppSelector((state) => state.user.team);
-
-  const [data, setData] = useState<MatchData[]>([]);
-  const [users, setUsers] = useState<string[]>([]);
-
-  useEffect(() => {
-    executeQuery<UsersList>(allUsersByTeam, {
-      team: currentUserTeam,
-    }).then(
-      (response) =>
-        response && setUsers(response.listUsers.items.map((user) => user.id))
-    );
-    executeQuery<MatchDataList>(AllMatchData).then((response) => {
-      const matchDataList = response?.listMatchData.items || [];
-      setData(
-        matchDataList
-          .filter((matchData) => users.includes(matchData.user))
-          .map((matchData) => {
-            return {
-              ...matchData,
-              autonomous: JSON.parse(matchData.autonomous),
-              teleop: JSON.parse(matchData.teleop),
-              endgame: JSON.parse(matchData.endgame),
-            };
-          })
-      );
-    });
-  }, [users]);
+  const { data } = props;
 
   const createCSV = () => {
     const csv: string =

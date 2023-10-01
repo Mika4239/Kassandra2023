@@ -9,57 +9,27 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import axios from "../../axios";
 import SelectGraph from "../selectGraph/selectGraph";
-import { useAppSelector } from "../../redux/hooks";
+import { DataGraphProps } from "./dataGraphProps";
+import { NumberData, getAvgForGroup, getCountForGroup, groupBy } from "../../utils/general";
 
-interface NumberData {
-  _id: string;
-  number: number;
-}
+const DataGraph: React.FC<DataGraphProps> = (props) => {
+  const { data } = props;
 
-const DataGraph = () => {
-  const currentUserTeam = useAppSelector((state) => state.user.team);
-  const [data, setData] = useState<NumberData[]>([]);
+  const [graphData, setGraphData] = useState<NumberData[]>([]);
   const [key, setKey] = useState<string>("");
 
   useEffect(() => {
-    if (key !== "") {
-      const initialBody = {
-        team: currentUserTeam,
-      };
-
-      if (key.includes("mobility")) {
-        axios
-          .post("/matchData/mobility", initialBody)
-          .then((response) => setData(response.data));
-      } else {
-        const isCount = key.includes("position");
-        const path = isCount ? "count" : "avg";
-        const splitKey = key.split(".");
-        const body = isCount
-          ? {
-              ...initialBody,
-              period: splitKey[0],
-              position: splitKey[splitKey.length - 1],
-            }
-          : {
-              ...initialBody,
-              path: key,
-            };
-        axios
-          .post(`/matchData/${path}`, body)
-          .then((response) => setData(response.data));
-      }
-    }
+    const groupedData = groupBy(data, "team");
+    setGraphData(key.includes("position") ? getCountForGroup(groupedData, key) : getAvgForGroup(groupedData, key))
   }, [key]);
 
   return (
     <>
       <ResponsiveContainer width="80%" aspect={2.5}>
-        <BarChart data={data}>
+        <BarChart data={graphData}>
           <CartesianGrid />
-          <XAxis dataKey="_id" />
+          <XAxis dataKey="team" />
           <YAxis />
           <Tooltip />
           <Legend />
