@@ -1,6 +1,7 @@
 interface MatchData {
     id: string;
     user: string;
+    event: string;
     match: string;
     team: string;
     autonomous: string;

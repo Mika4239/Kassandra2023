@@ -13,6 +13,7 @@ import useStyles from "./dataTableStyles";
 const MAIN_TITLES = [
   "",
   "",
+  "",
   "autonomous",
   "",
   "",
@@ -32,6 +33,7 @@ const MAIN_TITLES = [
 ];
 
 const SUB_TITLES = [
+  "event",
   "match",
   "team",
   "cones",
@@ -53,6 +55,7 @@ const SUB_TITLES = [
 ];
 
 const GP_TITLES = [
+  "",
   "",
   "",
   "top",
@@ -88,6 +91,8 @@ const DataTable: React.FC<DataTableProps> = (props) => {
       data
         .map(
           (row) =>
+            row.event +
+            "," +
             row.match +
             "," +
             row.team +
@@ -153,6 +158,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
           <TableBody>
             {data.map((row) => (
               <TableRow key={row.id}>
+                <TableCell>{row.event}</TableCell>
                 <TableCell>{row.match}</TableCell>
                 <TableCell>{row.team}</TableCell>
                 <TableCell>{row.autonomous.cones.top}</TableCell>
