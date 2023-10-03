@@ -6,12 +6,12 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import React, { useState } from "react";
-import { useAppSelector } from "../../redux/hooks";
-import useStyles from "./userMenuStyles";
+import { useAppSelector } from "../../redux/hooks.js";
+import useStyles from "./userMenuStyles.js";
 import { Divider } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { resetUser } from "../../redux/currentUserSlice";
+import { resetUser } from "../../redux/currentUserSlice.js";
 
 const PROFILE = "Profile";
 const GROUPS = "Teams";

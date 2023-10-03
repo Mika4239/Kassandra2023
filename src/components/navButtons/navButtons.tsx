@@ -1,11 +1,11 @@
 import { Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import useStyles from "./navButtonsStyles";
-import { useAppSelector } from "../../redux/hooks";
-import executeQuery from "../../graphql/graphqlClient";
-import { createMatchData } from "../../graphql/matchData/mutations";
-import { translateMatch, translateTeam } from "../../utils/translations";
-import { getTBAData } from "../../utils/general";
+import useStyles from "./navButtonsStyles.js";
+import { useAppSelector } from "../../redux/hooks.js";
+import executeQuery from "../../graphql/graphqlClient.js";
+import { createMatchData } from "../../graphql/matchData/mutations.js";
+import { translateMatch, translateTeam } from "../../utils/translations.js";
+import { getTBAData } from "../../utils/general.js";
 
 const BACK = 'Back';
 const NEXT = 'Next';

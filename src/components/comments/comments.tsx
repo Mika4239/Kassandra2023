@@ -1,8 +1,8 @@
 import { TextField } from "@mui/material";
-import useStyles from "./commetsStyles";
-import { useAppSelector } from "../../redux/hooks";
+import useStyles from "./commetsStyles.js";
+import { useAppSelector } from "../../redux/hooks.js";
 import { useDispatch } from "react-redux";
-import { setComments } from "../../redux/matchDataSlice";
+import { setComments } from "../../redux/matchDataSlice.js";
 
 const COMMENTS = 'comments';
 

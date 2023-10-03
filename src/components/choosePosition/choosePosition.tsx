@@ -2,12 +2,12 @@ import * as React from "react";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Position from "../../types/position";
-import useStyles from "./choosePositionStyles";
-import { useAppSelector } from "../../redux/hooks";
-import { PositionPeriods } from "../../interfaces/interfaces";
+import Position from "../../types/position.js";
+import useStyles from "./choosePositionStyles.js";
+import { useAppSelector } from "../../redux/hooks.js";
+import { PositionPeriods } from "../../interfaces/interfaces.js";
 import { useDispatch } from "react-redux";
-import { setPosition } from "../../redux/matchDataSlice";
+import { setPosition } from "../../redux/matchDataSlice.js";
 
 const AUTONOMOUS = "autonomous";
 const PARK = "PARK";

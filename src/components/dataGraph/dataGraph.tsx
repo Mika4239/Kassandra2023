@@ -9,9 +9,9 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import SelectGraph from "../selectGraph/selectGraph";
-import { DataGraphProps } from "./dataGraphProps";
-import { NumberData, getAvgForGroup, getCountForGroup, groupBy } from "../../utils/general";
+import SelectGraph from "../selectGraph/selectGraph.js";
+import { DataGraphProps } from "./dataGraphProps.js";
+import { NumberData, getAvgForGroup, getCountForGroup, groupBy } from "../../utils/general.js";
 
 const DataGraph: React.FC<DataGraphProps> = (props) => {
   const { data } = props;

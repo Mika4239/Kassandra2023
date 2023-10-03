@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
-import SelectMatch from "../views/selectMatch/selectMatch";
-import Autonomous from "../views/autonomous/autonomous";
-import Teleop from "../views/teleop/teleop";
-import Endgame from "../views/endgame/endgame";
-import Data from "../views/data/data";
-import Login from "../views/login/login";
-import Teams from "../views/teams/teams";
+import SelectMatch from "../views/selectMatch/selectMatch.js";
+import Autonomous from "../views/autonomous/autonomous.js";
+import Teleop from "../views/teleop/teleop.js";
+import Endgame from "../views/endgame/endgame.js";
+import Data from "../views/data/data.js";
+import Login from "../views/login/login.js";
+import Teams from "../views/teams/teams.js";
 
 const router = createBrowserRouter([
     {

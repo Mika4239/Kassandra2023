@@ -5,11 +5,11 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import React, { useState } from "react";
-import useStyles from "./addTeamDialogStyles";
-import { useAppSelector } from "../../redux/hooks";
-import executeQuery from "../../graphql/graphqlClient";
-import { createTeam } from "../../graphql/team/mutations";
-import { CreateTeam, CreateTeamInput } from "../../graphql/team/interfaces";
+import useStyles from "./addTeamDialogStyles.js";
+import { useAppSelector } from "../../redux/hooks.js";
+import executeQuery from "../../graphql/graphqlClient.js";
+import { createTeam } from "../../graphql/team/mutations.js";
+import { CreateTeam, CreateTeamInput } from "../../graphql/team/interfaces.js";
 
 const TTILE = "Add Team";
 const NAME = "Name";

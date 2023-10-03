@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
-import useStyles from "./navBarStyles";
-import UserMenu from "../userMenu/userMenu";
+import useStyles from "./navBarStyles.js";
+import UserMenu from "../userMenu/userMenu.js";
 
 const SCOUTING_PATH = "/select";
 const DATA_PATH = "/data";

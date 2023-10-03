@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import matchDataReducer from "./matchDataSlice";
-import currentUserReducer from "./currentUserSlice";
+import matchDataReducer from "./matchDataSlice.js";
+import currentUserReducer from "./currentUserSlice.js";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import persistStore from "redux-persist/es/persistStore";

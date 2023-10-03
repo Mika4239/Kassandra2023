@@ -3,9 +3,9 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useEffect, useState } from "react";
-import useStyles from "./selectGraphStyles";
-import { useAppSelector } from "../../redux/hooks";
-import { getNestedKeys } from "../../utils/general";
+import useStyles from "./selectGraphStyles.js";
+import { useAppSelector } from "../../redux/hooks.js";
+import { getNestedKeys } from "../../utils/general.js";
 
 const GRAPH = "Graph";
 

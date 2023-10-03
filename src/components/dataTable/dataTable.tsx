@@ -7,8 +7,8 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { DataTableProps } from "./dataTableProps";
-import useStyles from "./dataTableStyles";
+import { DataTableProps } from "./dataTableProps.js";
+import useStyles from "./dataTableStyles.js";
 
 const MAIN_TITLES = [
   "",

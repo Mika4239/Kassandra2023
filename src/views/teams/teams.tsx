@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import NavBar from "../../components/navBar/navBar";
-import TeamCard from "../../components/teamCard/teamCard";
-import useStyles from "./teamsStyles";
+import NavBar from "../../components/navBar/navBar.js";
+import TeamCard from "../../components/teamCard/teamCard.js";
+import useStyles from "./teamsStyles.js";
 import { Button } from "@mui/material";
 import GroupIcon from "@mui/icons-material/Group";
-import AddTeamDialog from "../../components/addGroupDialog/addTeamDialog";
-import executeQuery from "../../graphql/graphqlClient";
-import { getAllTeams } from "../../graphql/team/queries";
-import { AllTeams } from "../../graphql/team/interfaces";
+import AddTeamDialog from "../../components/addGroupDialog/addTeamDialog.js";
+import executeQuery from "../../graphql/graphqlClient.js";
+import { getAllTeams } from "../../graphql/team/queries.js";
+import { AllTeams } from "../../graphql/team/interfaces.js";
 
 const TEAMS = "Teams";
 const ADD_TEAM = "Add Team";

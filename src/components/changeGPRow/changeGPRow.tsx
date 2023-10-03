@@ -1,11 +1,11 @@
 import { IconButton, TextField } from "@mui/material";
-import useStyles from "./changeGPRowStyles";
+import useStyles from "./changeGPRowStyles.js";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import { useAppSelector } from "../../redux/hooks";
-import { Periods, GpState } from "../../interfaces/interfaces";
+import { useAppSelector } from "../../redux/hooks.js";
+import { Periods, GpState } from "../../interfaces/interfaces.js";
 import { useDispatch } from "react-redux";
-import { setGPAmount } from "../../redux/matchDataSlice";
+import { setGPAmount } from "../../redux/matchDataSlice.js";
 
 const CUBES = "cubes";
 

@@ -1,4 +1,4 @@
-import { MatchData } from "../../types/matchData";
+import { MatchData } from "../../types/matchData.js";
 
 export interface DataGraphProps {
     data: MatchData[];

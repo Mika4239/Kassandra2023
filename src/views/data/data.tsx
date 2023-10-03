@@ -1,15 +1,15 @@
-import DataTable from "../../components/dataTable/dataTable";
-import DataGraph from "../../components/dataGraph/dataGraph";
-import useStyles from "./dataStyles";
+import DataTable from "../../components/dataTable/dataTable.js";
+import DataGraph from "../../components/dataGraph/dataGraph.js";
+import useStyles from "./dataStyles.js";
 import React, { useEffect, useState } from "react";
-import NavBar from "../../components/navBar/navBar";
-import { MatchData } from "../../types/matchData";
-import executeQuery from "../../graphql/graphqlClient";
-import { UsersList } from "../../graphql/user/interfaces";
-import { allUsersByTeam } from "../../graphql/user/queries";
-import { useAppSelector } from "../../redux/hooks";
-import { MatchDataList } from "../../graphql/matchData/interfaces";
-import { AllMatchData } from "../../graphql/matchData/queries";
+import NavBar from "../../components/navBar/navBar.js";
+import { MatchData } from "../../types/matchData.js";
+import executeQuery from "../../graphql/graphqlClient.js";
+import { UsersList } from "../../graphql/user/interfaces.js";
+import { allUsersByTeam } from "../../graphql/user/queries.js";
+import { useAppSelector } from "../../redux/hooks.js";
+import { MatchDataList } from "../../graphql/matchData/interfaces.js";
+import { AllMatchData } from "../../graphql/matchData/queries.js";
 
 const TABLE = "Table";
 const GRAPH = "Graph";

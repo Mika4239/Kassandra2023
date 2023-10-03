@@ -1,9 +1,9 @@
-import ChangeGP from "../../components/changeGP/changeGP";
-import CheckMobility from "../../components/checkMobility/checkMobility";
-import ChoosePosition from "../../components/choosePosition/choosePosition";
-import NavBar from "../../components/navBar/navBar";
-import NavButtons from "../../components/navButtons/navButtons";
-import useStyles from "./autonomousStyles";
+import ChangeGP from "../../components/changeGP/changeGP.js";
+import CheckMobility from "../../components/checkMobility/checkMobility.js";
+import ChoosePosition from "../../components/choosePosition/choosePosition.js";
+import NavBar from "../../components/navBar/navBar.js";
+import NavButtons from "../../components/navButtons/navButtons.js";
+import useStyles from "./autonomousStyles.js";
 
 const CONES = "cones";
 const CUBES = "cubes";

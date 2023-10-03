@@ -1,4 +1,4 @@
-import { AutonomousState, EndgameState, TeleopState } from "../interfaces/interfaces";
+import { AutonomousState, EndgameState, TeleopState } from "../interfaces/interfaces.js";
 
 export interface MatchData {
     id: string;

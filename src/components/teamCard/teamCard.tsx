@@ -8,12 +8,12 @@ import CardMedia from "@mui/material/CardMedia";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import React from "react";
-import useStyles from "./teamCardStyles";
-import { useAppSelector } from "../../redux/hooks";
+import useStyles from "./teamCardStyles.js";
+import { useAppSelector } from "../../redux/hooks.js";
 import { useDispatch } from "react-redux";
-import { updateTeam } from "../../redux/currentUserSlice";
-import executeQuery from "../../graphql/graphqlClient";
-import { updateUserTeam } from "../../graphql/user/mutations";
+import { updateTeam } from "../../redux/currentUserSlice.js";
+import executeQuery from "../../graphql/graphqlClient.js";
+import { updateUserTeam } from "../../graphql/user/mutations.js";
 
 const TeamCard: React.FC<TeamCardProps> = (props) => {
   const { classes } = useStyles();

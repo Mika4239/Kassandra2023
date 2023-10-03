@@ -1,8 +1,8 @@
 import { Checkbox } from "@mui/material";
-import useStyles from "./checkMobilityStyles";
-import { useAppSelector } from "../../redux/hooks";
+import useStyles from "./checkMobilityStyles.js";
+import { useAppSelector } from "../../redux/hooks.js";
 import { useDispatch } from "react-redux";
-import { setMobility } from "../../redux/matchDataSlice";
+import { setMobility } from "../../redux/matchDataSlice.js";
 
 const MOBILITY = 'Mobility:';
 

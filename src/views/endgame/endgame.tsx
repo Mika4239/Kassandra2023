@@ -1,8 +1,8 @@
-import ChoosePosition from "../../components/choosePosition/choosePosition";
-import Comments from "../../components/comments/comments";
-import NavBar from "../../components/navBar/navBar";
-import NavButtons from "../../components/navButtons/navButtons";
-import useStyles from "./endgameStyles";
+import ChoosePosition from "../../components/choosePosition/choosePosition.js";
+import Comments from "../../components/comments/comments.js";
+import NavBar from "../../components/navBar/navBar.js";
+import NavButtons from "../../components/navButtons/navButtons.js";
+import useStyles from "./endgameStyles.js";
 
 const ENDGAME = "endgame";
 

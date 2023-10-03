@@ -1,14 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
-import SelectFromData from "../../components/selectFromData/selectFromData";
-import useStyles from "./selectMatchStyles";
+import SelectFromData from "../../components/selectFromData/selectFromData.js";
+import useStyles from "./selectMatchStyles.js";
 import { Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppSelector } from "../../redux/hooks.js";
 import { useDispatch } from "react-redux";
-import { resetMatchData, setMatchTeam } from "../../redux/matchDataSlice";
-import NavBar from "../../components/navBar/navBar";
-import { translateMatch, translateTeam } from "../../utils/translations";
-import { getTBAData } from "../../utils/general";
+import { resetMatchData, setMatchTeam } from "../../redux/matchDataSlice.js";
+import NavBar from "../../components/navBar/navBar.js";
+import { translateMatch, translateTeam } from "../../utils/translations.js";
+import { getTBAData } from "../../utils/general.js";
 
 const SELECT_MATCH = "Select Match";
 

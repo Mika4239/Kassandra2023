@@ -1,7 +1,7 @@
-import ChangeGP from "../../components/changeGP/changeGP";
-import NavBar from "../../components/navBar/navBar";
-import NavButtons from "../../components/navButtons/navButtons";
-import useStyles from "./teleopStyles";
+import ChangeGP from "../../components/changeGP/changeGP.js";
+import NavBar from "../../components/navBar/navBar.js";
+import NavButtons from "../../components/navButtons/navButtons.js";
+import useStyles from "./teleopStyles.js";
 
 const CONES = "cones";
 const CUBES = "cubes";

@@ -2,11 +2,11 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import useStyles from "./selectFromDataStyles";
-import { useAppSelector } from "../../redux/hooks";
-import { SelectMatchState } from "../../interfaces/interfaces";
+import useStyles from "./selectFromDataStyles.js";
+import { useAppSelector } from "../../redux/hooks.js";
+import { SelectMatchState } from "../../interfaces/interfaces.js";
 import { useDispatch } from "react-redux";
-import { setMatchTeam, setTeamIndex } from "../../redux/matchDataSlice";
+import { setMatchTeam, setTeamIndex } from "../../redux/matchDataSlice.js";
 
 const SelectFromData: React.FC<SelectFromDataProps> = (props) => {
   const { classes } = useStyles();

@@ -1,13 +1,13 @@
 import { Button, TextField } from "@mui/material";
-import useStyles from "./loginStyles";
+import useStyles from "./loginStyles.js";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../redux/currentUserSlice";
-import SignUpDialog from "../../components/signUpDialog/signUpDialog";
-import executeQuery from "../../graphql/graphqlClient";
-import { checkUser } from "../../graphql/user/queries";
-import { UsersList } from "../../graphql/user/interfaces";
+import { setUser } from "../../redux/currentUserSlice.js";
+import SignUpDialog from "../../components/signUpDialog/signUpDialog.js";
+import executeQuery from "../../graphql/graphqlClient.js";
+import { checkUser } from "../../graphql/user/queries.js";
+import { UsersList } from "../../graphql/user/interfaces.js";
 
 const LOGIN = "Login";
 const SIGN_IN = "Sign in";

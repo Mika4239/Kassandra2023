@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import Position from "../types/position";
+import Position from "../types/position.js";
 import {
   PeriodGP,
   TeleopState,
@@ -10,7 +10,7 @@ import {
   SelectMatchState,
   MatchDataState,
   GpState,
-} from "../interfaces/interfaces";
+} from "../interfaces/interfaces.js";
 
 const initialGp: GpState = {
   top: 0,

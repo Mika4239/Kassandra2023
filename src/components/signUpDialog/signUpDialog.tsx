@@ -5,14 +5,14 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
-import useStyles from "./signUpDialogStyles";
+import useStyles from "./signUpDialogStyles.js";
 import { IconButton } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import SelectTeam from "../selectTeam/selectTeam";
-import executeQuery from "../../graphql/graphqlClient";
-import { createUser } from "../../graphql/user/mutations";
-import { CreateUser, CreateUserInput } from "../../graphql/user/interfaces";
+import SelectTeam from "../selectTeam/selectTeam.js";
+import executeQuery from "../../graphql/graphqlClient.js";
+import { createUser } from "../../graphql/user/mutations.js";
+import { CreateUser, CreateUserInput } from "../../graphql/user/interfaces.js";
 
 const SIGN_UP = "Sign Up";
 

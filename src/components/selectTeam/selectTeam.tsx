@@ -3,9 +3,9 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import React, { useEffect, useState } from "react";
-import executeQuery from "../../graphql/graphqlClient";
-import { getAllTeams } from "../../graphql/team/queries";
-import { AllTeams } from "../../graphql/team/interfaces";
+import executeQuery from "../../graphql/graphqlClient.js";
+import { getAllTeams } from "../../graphql/team/queries.js";
+import { AllTeams } from "../../graphql/team/interfaces.js";
 
 const TEAM = "Team";
 const LABEL = "team-label";
