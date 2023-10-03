@@ -1,5 +1,5 @@
 import ChangeGPRow from "../changeGPRow/changeGPRow";
-import useStyles from "./changeGpStyles";
+import useStyles from "./changeGPStyles";
 
 const TOP = "top";
 const MIDDLE = "middle";
