@@ -6,13 +6,15 @@ import useStyles from "./selectFromDataStyles";
 import { useAppSelector } from "../../redux/hooks";
 import { SelectMatchState } from "../../interfaces/interfaces";
 import { useDispatch } from "react-redux";
-import { setMatchTeam } from "../../redux/matchDataSlice";
+import { setMatchTeam, setTeamIndex } from "../../redux/matchDataSlice";
 
 const SelectFromData: React.FC<SelectFromDataProps> = (props) => {
   const { classes } = useStyles();
-  const { name, data } = props;
+  const { name, data, dataTranslate } = props;
 
-  const chosen = useAppSelector(state => state.matchData[name as keyof SelectMatchState]);
+  const chosen = useAppSelector(
+    (state) => state.matchData[name as keyof SelectMatchState]
+  );
   const dispatch = useDispatch();
 
   return (
@@ -22,10 +24,14 @@ const SelectFromData: React.FC<SelectFromDataProps> = (props) => {
         labelId={name + "-label"}
         value={chosen}
         label={name}
-        onChange={(e) => dispatch(setMatchTeam({name: name, input: e.target.value}))}
+        onChange={(e) => {
+          dispatch(setMatchTeam({ name: name, input: e.target.value }));
+        }}
       >
         {data.map((item, index) => (
-          <MenuItem key={index} value={item}>{item}</MenuItem>
+          <MenuItem key={index} value={item} onClick={() =>name === "team" && dispatch(setTeamIndex(index))}>
+            {dataTranslate(item, index)}
+          </MenuItem>
         ))}
       </Select>
     </FormControl>

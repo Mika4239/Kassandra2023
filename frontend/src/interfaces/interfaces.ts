@@ -37,8 +37,10 @@ export interface EndgameState {
 
 export interface MatchDataState {
   user: string;
+  event: string;
   match: string;
   team: string;
+  teamIndex: number;
   autonomous: AutonomousState;
   teleop: TeleopState;
   endgame: EndgameState;
@@ -66,4 +68,5 @@ export interface MatchTeam {
 export interface SelectMatchState {
   team: string;
   match: string;
+  event: string;
 }

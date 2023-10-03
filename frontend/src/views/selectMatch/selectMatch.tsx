@@ -7,52 +7,60 @@ import { useAppSelector } from "../../redux/hooks";
 import { useDispatch } from "react-redux";
 import { resetMatchData, setMatchTeam } from "../../redux/matchDataSlice";
 import NavBar from "../../components/navBar/navBar";
+import { translateMatch, translateTeam } from "../../utils/translations";
+import { getTBAData } from "../../utils/general";
 
 const SELECT_MATCH = "Select Match";
 
+const EVENT = "event";
 const MATCH = "match";
 const TEAM = "team";
 
 const START = "Start";
 const NEXT_PATH = "/autonomous";
 
-const USER = 'user';
+const USER = "user";
 
 const SelectMatch: React.FC = () => {
   const { classes } = useStyles();
 
+  const [events, setEvents] = useState<Event[]>([]);
   const [matches, setMatches] = useState<string[]>([]);
   const [teams, setTeams] = useState<string[]>([]);
 
+  const event = useAppSelector((state) => state.matchData.event);
   const match = useAppSelector((state) => state.matchData.match);
   const userId = useAppSelector((state) => state.user.id);
   const dispatch = useDispatch();
 
-  const getData = async <T,>(url: string): Promise<T> => {
-    const resp = await fetch(url, {
-      headers: {
-        "X-TBA-Auth-Key":
-          "YwrN3ZwfFtrn5XniP4zwpDpLCOiaC04rLlzuF0yC5MYEPPErbTHkXfUOptnl13WK", // TODO: find a way to add key with .env
-      },
-    });
-    return resp.json();
-  };
-
   useEffect(() => {
     dispatch(resetMatchData());
-
-    getData<Match[]>(
-      "https://www.thebluealliance.com/api/v3/event/2023isde1/matches"
-    )
+    getTBAData<Event[]>("https://www.thebluealliance.com/api/v3/events/2023")
       .catch((error) => console.log(error))
-      .then(
-        (response) => response && setMatches(response.map((event) => event.key))
-      );
+      .then((response) => response && setEvents(response));
   }, []);
 
   useMemo(() => {
+    getTBAData<Match[]>(
+      `https://www.thebluealliance.com/api/v3/event/${event}/matches/simple`
+    )
+      .catch((error) => console.log(error))
+      .then(
+        (response) =>
+          response &&
+          setMatches(
+            response
+              .sort((a, b) => a.predicted_time - b.predicted_time)
+              .map((event) => event.key)
+          )
+      );
+  }, [event]);
+
+  useMemo(() => {
     match !== "" &&
-      getData<Match>(`https://www.thebluealliance.com/api/v3/match/${match}`)
+      getTBAData<Match>(
+        `https://www.thebluealliance.com/api/v3/match/${match}/simple`
+      )
         .catch((error) => console.log(error))
         .then(
           (response) =>
@@ -63,21 +71,40 @@ const SelectMatch: React.FC = () => {
               )
             )
         );
-  }, [match]);
+  }, [match, event]);
+
+  const translateEvent = (key: string) => {
+    return events.find((event) => event.key == key)?.name || "";
+  };
 
   const start = () => {
-    dispatch(setMatchTeam({name: USER, input: userId}));
-  }
+    dispatch(setMatchTeam({ name: USER, input: userId || "" }));
+  };
 
   return (
     <>
       <NavBar />
       <div className={classes.selectPage}>
         <h1 className={classes.title}>{SELECT_MATCH}</h1>
-        <SelectFromData name={MATCH} data={matches} />
-        <SelectFromData name={TEAM} data={teams} />
+        <SelectFromData
+          name={EVENT}
+          data={events.map((event) => event.key)}
+          dataTranslate={translateEvent}
+        />
+        <SelectFromData
+          name={MATCH}
+          data={matches}
+          dataTranslate={translateMatch}
+        />
+        <SelectFromData
+          name={TEAM}
+          data={teams}
+          dataTranslate={translateTeam}
+        />
         <NavLink to={NEXT_PATH}>
-          <Button variant="contained" onClick={start}>{START}</Button>
+          <Button variant="contained" onClick={start}>
+            {START}
+          </Button>
         </NavLink>
       </div>
     </>

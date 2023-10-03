@@ -1,3 +1,12 @@
+export const getTBAData = async <T>(url: string): Promise<T> => {
+  const resp = await fetch(url, {
+    headers: {
+      "X-TBA-Auth-Key": import.meta.env.VITE_TBA_AUTH_KEY,
+    },
+  });
+  return resp.json();
+};
+
 interface GroupObject {
   [key: string]: any[];
 }
@@ -49,7 +58,11 @@ export const getCountForGroup = (
   });
 };
 
-export const getNestedKeys = (data: Object, keys: string[], keyString: string) => {
+export const getNestedKeys = (
+  data: Object,
+  keys: string[],
+  keyString: string
+) => {
   if (typeof data == "object") {
     Object.keys(data).forEach((key) => {
       const value = data[key as keyof Object];

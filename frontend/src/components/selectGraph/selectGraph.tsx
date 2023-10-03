@@ -37,7 +37,6 @@ const SelectGraph: React.FC<SelectGraphProps> = (props) => {
               : [nestedKey]
           ))
       );
-    console.log(nestedKeys);
     setKeys(nestedKeys);
   }, []);
 

@@ -3,7 +3,9 @@ query listMatchData {
     listMatchData {
         items {
             id
+            createdAt
             user
+            event
             match
             team
             autonomous

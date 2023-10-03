@@ -45,6 +45,16 @@ const Data: React.FC = () => {
     });
   }, [users]);
 
+  const getTeamForGroup = (data: MatchData[]): MatchData[] => {
+    return data.map((matchData) => {
+      const teamSplitBySpace = matchData.team.split(" ");
+      return {
+        ...matchData,
+        team: teamSplitBySpace[teamSplitBySpace.length - 1],
+      };
+    });
+  };
+
   return (
     <>
       <NavBar />
@@ -52,7 +62,7 @@ const Data: React.FC = () => {
         <h1 className={classes.title}>{TABLE}</h1>
         <DataTable data={data} />
         <h1 className={classes.title}>{GRAPH}</h1>
-        <DataGraph data={data} />
+        <DataGraph data={getTeamForGroup(data)} />
       </div>
     </>
   );

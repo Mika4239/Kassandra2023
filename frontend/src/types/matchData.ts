@@ -2,6 +2,8 @@ import { AutonomousState, EndgameState, TeleopState } from "../interfaces/interf
 
 export interface MatchData {
     id: string;
+    createdAt?: string;
+    event: string;
     match: string;
     team: string;
     autonomous: AutonomousState,
