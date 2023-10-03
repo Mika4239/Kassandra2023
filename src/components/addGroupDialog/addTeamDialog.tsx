@@ -23,7 +23,7 @@ const AddTeamDialog: React.FC<AddTeamDialogProps> = (props) => {
   const { classes } = useStyles();
   const { open, setOpen, setTeams } = props;
 
-  const currentUserId = useAppSelector(state => state.user._id);
+  const currentUserId = useAppSelector(state => state.user.id);
 
   const [name, setName] = useState<string>("");
   const [number, setNumber] = useState<number>();
