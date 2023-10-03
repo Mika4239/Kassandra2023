@@ -14,6 +14,7 @@ const MAIN_TITLES = [
   "",
   "",
   "",
+  "",
   "autonomous",
   "",
   "",
@@ -33,6 +34,7 @@ const MAIN_TITLES = [
 ];
 
 const SUB_TITLES = [
+  "time",
   "event",
   "match",
   "team",
@@ -55,6 +57,7 @@ const SUB_TITLES = [
 ];
 
 const GP_TITLES = [
+  "",
   "",
   "",
   "",
@@ -91,6 +94,8 @@ const DataTable: React.FC<DataTableProps> = (props) => {
       data
         .map(
           (row) =>
+            row.createdAt +
+            "," +
             row.event +
             "," +
             row.match +
@@ -158,6 +163,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
           <TableBody>
             {data.map((row) => (
               <TableRow key={row.id}>
+                <TableCell>{(new Date(row.createdAt as string)).toUTCString()}</TableCell>
                 <TableCell>{row.event}</TableCell>
                 <TableCell>{row.match}</TableCell>
                 <TableCell>{row.team}</TableCell>
@@ -167,7 +173,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
                 <TableCell>{row.autonomous.cubes.top}</TableCell>
                 <TableCell>{row.autonomous.cubes.middle}</TableCell>
                 <TableCell>{row.autonomous.cubes.bottom}</TableCell>
-                <TableCell>{row.autonomous.mobility}</TableCell>
+                <TableCell>{String(row.autonomous.mobility)}</TableCell>
                 <TableCell>{row.autonomous.position}</TableCell>
                 <TableCell>{row.teleop.cones.top}</TableCell>
                 <TableCell>{row.teleop.cones.middle}</TableCell>
