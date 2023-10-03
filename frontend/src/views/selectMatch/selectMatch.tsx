@@ -7,6 +7,8 @@ import { useAppSelector } from "../../redux/hooks";
 import { useDispatch } from "react-redux";
 import { resetMatchData, setMatchTeam } from "../../redux/matchDataSlice";
 import NavBar from "../../components/navBar/navBar";
+import { translateMatch, translateTeam } from "../../utils/translations";
+import { getTBAData } from "../../utils/general";
 
 const SELECT_MATCH = "Select Match";
 
@@ -18,30 +20,6 @@ const START = "Start";
 const NEXT_PATH = "/autonomous";
 
 const USER = "user";
-
-const TbaKeys = {
-  qm: "qualification match",
-  ef: "eighth finals",
-  qf: "quarterfinals",
-  sf: "semifinals",
-  f: "finals",
-  m: "match",
-};
-
-const translateMatch = (key: string) => {
-  const tbaKeyArr = key.split("_")[1].split(/(\d+)/);
-  // all the even places in the array are strings and odds places are numbers, so we need to translate only the strings
-  return tbaKeyArr
-    .map((matchKey, index) =>
-      index % 2 == 0 ? TbaKeys[matchKey as keyof typeof TbaKeys] : matchKey
-    )
-    .join(" ");
-};
-
-const translateTeam = (key: string, index?: number) => {
-  const alliance = (index as number) < 3 ? "blue" : "red";
-  return `${alliance} ${(index as number) + 1} - ${key.replace("frc", "")}`;
-};
 
 const SelectMatch: React.FC = () => {
   const { classes } = useStyles();
@@ -55,25 +33,15 @@ const SelectMatch: React.FC = () => {
   const userId = useAppSelector((state) => state.user.id);
   const dispatch = useDispatch();
 
-  const getData = async <T,>(url: string): Promise<T> => {
-    const resp = await fetch(url, {
-      headers: {
-        "X-TBA-Auth-Key": import.meta.env.VITE_TBA_AUTH_KEY,
-      },
-    });
-    return resp.json();
-  };
-
   useEffect(() => {
     dispatch(resetMatchData());
-
-    getData<Event[]>("https://www.thebluealliance.com/api/v3/events/2023")
+    getTBAData<Event[]>("https://www.thebluealliance.com/api/v3/events/2023")
       .catch((error) => console.log(error))
       .then((response) => response && setEvents(response));
   }, []);
 
   useMemo(() => {
-    getData<Match[]>(
+    getTBAData<Match[]>(
       `https://www.thebluealliance.com/api/v3/event/${event}/matches/simple`
     )
       .catch((error) => console.log(error))
@@ -86,9 +54,11 @@ const SelectMatch: React.FC = () => {
               .map((event) => event.key)
           )
       );
+  }, [event]);
 
+  useMemo(() => {
     match !== "" &&
-      getData<Match>(
+      getTBAData<Match>(
         `https://www.thebluealliance.com/api/v3/match/${match}/simple`
       )
         .catch((error) => console.log(error))

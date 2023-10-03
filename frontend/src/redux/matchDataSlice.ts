@@ -23,6 +23,7 @@ const initialState: MatchDataState = {
   event: "",
   match: "",
   team: "",
+  teamIndex: 0, 
   autonomous: {
     mobility: false,
     cones: initialGp,
@@ -44,8 +45,6 @@ export const matchDataSlice = createSlice({
   initialState: initialState,
   reducers: {
     resetMatchData: (state) => {
-      (state.match = initialState.match),
-        (state.team = initialState.team),
         (state.autonomous = initialState.autonomous),
         (state.teleop = initialState.teleop),
         (state.endgame = initialState.endgame);
@@ -76,6 +75,9 @@ export const matchDataSlice = createSlice({
       state[action.payload.name as keyof SelectMatchState] =
         action.payload.input;
     },
+    setTeamIndex: (state, action: PayloadAction<number>) => {
+      state.teamIndex = action.payload;
+    }
   },
 });
 
@@ -86,6 +88,7 @@ export const {
   setMobility,
   setComments,
   setMatchTeam,
+  setTeamIndex
 } = matchDataSlice.actions;
 
 export default matchDataSlice.reducer;

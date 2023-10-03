@@ -40,6 +40,7 @@ export interface MatchDataState {
   event: string;
   match: string;
   team: string;
+  teamIndex: number;
   autonomous: AutonomousState;
   teleop: TeleopState;
   endgame: EndgameState;

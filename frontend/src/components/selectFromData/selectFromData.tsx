@@ -6,7 +6,7 @@ import useStyles from "./selectFromDataStyles";
 import { useAppSelector } from "../../redux/hooks";
 import { SelectMatchState } from "../../interfaces/interfaces";
 import { useDispatch } from "react-redux";
-import { setMatchTeam } from "../../redux/matchDataSlice";
+import { setMatchTeam, setTeamIndex } from "../../redux/matchDataSlice";
 
 const SelectFromData: React.FC<SelectFromDataProps> = (props) => {
   const { classes } = useStyles();
@@ -29,7 +29,7 @@ const SelectFromData: React.FC<SelectFromDataProps> = (props) => {
         }}
       >
         {data.map((item, index) => (
-          <MenuItem key={index} value={item}>
+          <MenuItem key={index} value={item} onClick={() =>name === "team" && dispatch(setTeamIndex(index))}>
             {dataTranslate(item, index)}
           </MenuItem>
         ))}
